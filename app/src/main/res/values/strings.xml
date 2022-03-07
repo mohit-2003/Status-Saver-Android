@@ -1,0 +1,25 @@
+<resources>
+        <string name="app_name">Story Saver For WhatsApp</string>
+    <string name="title_activity_drawer">WhatsAppStatus</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">hmdev.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_description" translatable="false">Story Saver For WhatsApp</string>
+    <string name="all_rights_reserved">Copyright © HM-DEV. All Rights Reserved.</string>
+
+    <!-- Please check DrawerActivity.java file to change the interstitial ads unit -->
+    <string name="banner_ad_unit" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="youAreNotUpdatedTitle">Update Available</string>
+    <string name="youAreNotUpdatedMessage">A new version of WhatsApp Status Saver is available. Please update to version\s</string>
+    <string name="youAreNotUpdatedMessage1">\s now</string>
+    <string name="update">Update</string>
+</resources>
