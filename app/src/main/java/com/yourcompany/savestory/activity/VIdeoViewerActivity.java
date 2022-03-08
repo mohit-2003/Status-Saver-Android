@@ -17,9 +17,7 @@ import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import com.yourcompany.savestory.utils.Observer;
 import com.yourcompany.savestory.R;
-import com.yourcompany.savestory.utils.Subject;
 import com.yourcompany.savestory.utils.Config;
 
 import java.io.File;
@@ -30,17 +28,12 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VIdeoViewerActivity extends AppCompatActivity implements Subject {
-	
-	//Downloaded From :	https://nulledsourcecode.com/
-	//Contact us for reskin and making custom android app: https://nulledsourcecode.com/submit-ticket/
-
+public class VIdeoViewerActivity extends AppCompatActivity {
 
     private final String TAG = "VideoViewer";
     public LinearLayout btn_download, btn_share, btn_re_post;
     public ImageButton img_btn_download, img_btn_share, img_re_post;
     public int count = Config.count;
-    public List<Observer> observers;
     String videoPath = "", path = "", atype = "", package_name = "";
     String type = "";
     VideoView video_view;
@@ -53,8 +46,6 @@ public class VIdeoViewerActivity extends AppCompatActivity implements Subject {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         video_view = findViewById(R.id.video_view);
-
-        observers = new ArrayList<>();
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -329,29 +320,6 @@ public class VIdeoViewerActivity extends AppCompatActivity implements Subject {
             allSharedPreference(i);
         }
         listenerValue = String.valueOf(i);
-        register(drawer);
-        notifyObservers();
-        unregister(drawer);
-    }
 
-
-    @Override
-    public void register(final Observer observer) {
-        if (!observers.contains(observer)) {
-            observers.add(observer);
-        }
-    }
-
-    @Override
-    public void unregister(final Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (final Observer observer : observers) {
-            Log.v("KKKKKKKKK", "" + listenerValue);
-            observer.update(listenerValue, VIdeoViewerActivity.this);
-        }
     }
 }

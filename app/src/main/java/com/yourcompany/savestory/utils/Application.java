@@ -7,10 +7,6 @@ import android.util.Log;
 
 
 public class Application extends android.app.Application {
-	
-	//Downloaded From :	https://nulledsourcecode.com/
-	//Contact us for reskin and making custom android app: https://nulledsourcecode.com/submit-ticket/
-
 
     private static final String TAG = Application.class.getSimpleName();
 

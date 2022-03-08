@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,9 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.yourcompany.savestory.utils.Observer;
 import com.yourcompany.savestory.R;
-import com.yourcompany.savestory.utils.Subject;
 import com.yourcompany.savestory.utils.Config;
 
 import java.io.File;
@@ -26,20 +24,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
-import java.util.List;
 
-public class ImageViewerActivity extends AppCompatActivity implements Subject {
-	
-	//Downloaded From :	https://nulledsourcecode.com/
-	//Contact us for reskin and making custom android app: https://nulledsourcecode.com/submit-ticket/
-
+public class ImageViewerActivity extends AppCompatActivity {
 
     private final String TAG = "ImageViewer";
     public LinearLayout btn_download, btn_share, btn_re_post;
     public ImageButton img_btn_download, img_btn_share, img_re_post;
     public int count = Config.count;
-    public List<Observer> observers;
     String image_path = "", path = "", atype = "", package_name = "";
     String type = "";
     ImageView imageView;
@@ -52,8 +43,6 @@ public class ImageViewerActivity extends AppCompatActivity implements Subject {
         setContentView(R.layout.activity_image);
 
         imageView = findViewById(R.id.imageView);
-
-        observers = new ArrayList<>();
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -296,29 +285,6 @@ public class ImageViewerActivity extends AppCompatActivity implements Subject {
             allSharedPreference(i);
         }
         listenerValue = String.valueOf(i);
-        register(drawer);
-        notifyObservers();
-        unregister(drawer);
-    }
 
-
-    @Override
-    public void register(final Observer observer) {
-        if (!observers.contains(observer)) {
-            observers.add(observer);
-        }
-    }
-
-    @Override
-    public void unregister(final Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (final Observer observer : observers) {
-            Log.v("KKKKKKKKK", "" + listenerValue);
-            observer.update(listenerValue, ImageViewerActivity.this);
-        }
     }
 }

@@ -29,10 +29,6 @@ import java.util.ArrayList;
  */
 public class GWAVideosFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-//Downloaded From :	https://nulledsourcecode.com/
-	//Contact us for reskin and making custom android app: https://nulledsourcecode.com/submit-ticket/
-
-
     ArrayList<ModelStatus> data;
     RecyclerView rv;
     TextView textView;

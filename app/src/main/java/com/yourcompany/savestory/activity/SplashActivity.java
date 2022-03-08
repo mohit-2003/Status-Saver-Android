@@ -27,10 +27,6 @@ import java.util.concurrent.ExecutionException;
 
 
 public class SplashActivity extends Activity {
-	
-	//Downloaded From :	https://nulledsourcecode.com/
-	//Contact us for reskin and making custom android app: https://nulledsourcecode.com/submit-ticket/
-
 
     private static int SPLASH_TIME_OUT = 1000;
     private static int SPLASH_TIME = 4000;

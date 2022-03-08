@@ -18,9 +18,7 @@ import android.widget.Toast;
 import com.yourcompany.savestory.activity.DrawerActivity;
 import com.bumptech.glide.Glide;
 import com.yourcompany.savestory.model.ModelStatus;
-import com.yourcompany.savestory.utils.Observer;
 import com.yourcompany.savestory.R;
-import com.yourcompany.savestory.utils.Subject;
 import com.yourcompany.savestory.utils.Config;
 import com.yourcompany.savestory.activity.ImageViewerActivity;
 
@@ -32,15 +30,10 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyViewHolder> implements Subject {
-	
-	//Downloaded From :	https://nulledsourcecode.com/
-	//Contact us for reskin and making custom android app: https://nulledsourcecode.com/submit-ticket/
-
+public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyViewHolder>{
 
     private final String TAG = "PICTUREAdaptor";
     public int count = Config.count;
-    public List<Observer> observers;
     String listenerValue = "";
     DrawerActivity drawer = new DrawerActivity();
     private Context acontext;
@@ -49,7 +42,6 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
     public WAPictureAdaptor(Context context, ArrayList<ModelStatus> arrayList) {
         this.arrayList = arrayList;
         acontext = context;
-        observers = new ArrayList<>();
     }
 
     @Override
@@ -160,29 +152,6 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
             allSharedPreference(i);
         }
         listenerValue = String.valueOf(i);
-        register(drawer);
-        notifyObservers();
-        unregister(drawer);
-    }
-
-    @Override
-    public void register(final Observer observer) {
-        if (!observers.contains(observer)) {
-            observers.add(observer);
-        }
-    }
-
-    @Override
-    public void unregister(final Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (final Observer observer : observers) {
-            Log.v("KKKKKKKKK", "" + listenerValue);
-            observer.update(listenerValue, acontext);
-        }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

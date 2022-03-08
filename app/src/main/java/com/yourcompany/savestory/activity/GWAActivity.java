@@ -15,9 +15,6 @@ import com.yourcompany.savestory.R;
 import com.yourcompany.savestory.fragment.GWAPictureFragment;
 import com.yourcompany.savestory.fragment.GWASaveFragment;
 import com.yourcompany.savestory.fragment.GWAVideosFragment;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +24,11 @@ public class GWAActivity extends AppCompatActivity {
     private final String TAG = DrawerActivity.class.getSimpleName();
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gb);
-        MobileAds.initialize(this, String.valueOf(R.string.admob_app_id));
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,22 +47,7 @@ public class GWAActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-
-        adView = (AdView) findViewById(R.id.admob_adview);
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-        adView.loadAd(adRequest);
-
     }
-
-    @Override
-    protected void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-        super.onDestroy();
-    }
-
 
     private void setupViewPager(ViewPager viewPager) {
         GWAActivity.ViewPagerAdapter adapter = new GWAActivity.ViewPagerAdapter(GWAActivity.this, getSupportFragmentManager());

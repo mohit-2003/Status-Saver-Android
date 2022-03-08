@@ -18,9 +18,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.yourcompany.savestory.activity.DrawerActivity;
 import com.yourcompany.savestory.model.ModelStatus;
-import com.yourcompany.savestory.utils.Observer;
 import com.yourcompany.savestory.R;
-import com.yourcompany.savestory.utils.Subject;
 import com.yourcompany.savestory.utils.Config;
 import com.yourcompany.savestory.activity.VIdeoViewerActivity;
 
@@ -32,15 +30,11 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyViewHolder> implements Subject {
+public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyViewHolder> {
 	
-	//Downloaded From :	https://nulledsourcecode.com/
-	//Contact us for reskin and making custom android app: https://nulledsourcecode.com/submit-ticket/
-
 
     private final String TAG = "VIDEOAdaptor";
     public int count = Config.count;
-    public List<Observer> observers;
     String listenerValue = "";
     DrawerActivity drawer = new DrawerActivity();
     private Context acontext;
@@ -49,7 +43,6 @@ public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyView
     public WAVideosAdaptor(Context context, ArrayList<ModelStatus> arrayList) {
         this.arrayList = arrayList;
         acontext = context;
-        observers = new ArrayList<>();
     }
 
     @Override
@@ -154,29 +147,6 @@ public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyView
             allSharedPreference(i);
         }
         listenerValue = String.valueOf(i);
-        register(drawer);
-        notifyObservers();
-        unregister(drawer);
-    }
-
-    @Override
-    public void register(final Observer observer) {
-        if (!observers.contains(observer)) {
-            observers.add(observer);
-        }
-    }
-
-    @Override
-    public void unregister(final Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (final Observer observer : observers) {
-            Log.v("KKKKKKKKK", "" + listenerValue);
-            observer.update(listenerValue, acontext);
-        }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -185,7 +155,6 @@ public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyView
         public ImageView imageView;
         public LinearLayout btn_download, btn_share;
         public ImageButton img_btn_download, img_btn_share;
-
 
         public MyViewHolder(View v) {
             super(v);

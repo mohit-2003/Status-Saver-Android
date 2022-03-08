@@ -23,10 +23,6 @@ public class ForceUpdateAsync extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... params) {
-		
-		//Downloaded From :	https://nulledsourcecode.com/
-	//Contact us for reskin and making custom android app: https://nulledsourcecode.com/submit-ticket/
-
 
         try {
             newVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" +  context.getPackageName() + "&hl=en")
