@@ -69,7 +69,7 @@ public class WAVideosFragment extends Fragment implements SwipeRefreshLayout.OnR
                         Log.d("Files", "FileName:" + files[i].getName());
                         Log.d("Files", "FileName:" + files[i].getName().substring(0, files[i].getName().length() - 4));
                         if (files[i].getName().endsWith(".mp4")) {
-                            paths[0] = path + "" + files[i].getName();
+                            paths[0] = path + "/" + files[i].getName();
                             ModelStatus modelStatus = new ModelStatus(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
                             data.add(modelStatus);
                         }

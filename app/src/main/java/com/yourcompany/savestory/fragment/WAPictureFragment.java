@@ -9,6 +9,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,12 +60,10 @@ public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.On
 
     public void loadData() {
         data = new ArrayList<>();
-        Log.d("mohit", "loadData: "+Config.WhatsAppDirectoryPath);
         final String path = Config.WhatsAppDirectoryPath;
         File directory = new File(path);
         if (directory.exists()) {
             final File[] files = directory.listFiles();
-//            Log.d("Files", "Size: " + files.length);
             final String[] paths = {""};
             new AsyncTask<Void, Void, Void>() {
                 @Override
@@ -72,7 +72,7 @@ public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.On
                         Log.d("Files", "FileName:" + files[i].getName());
                         Log.d("Files", "FileName:" + files[i].getName().substring(0, files[i].getName().length() - 4));
                         if (files[i].getName().endsWith(".jpg") || files[i].getName().endsWith("gif")) {
-                            paths[0] = path + "" + files[i].getName();
+                            paths[0] = path + "/" + files[i].getName();
                             ModelStatus modelStatus = new ModelStatus(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
                             data.add(modelStatus);
                         }

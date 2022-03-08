@@ -10,7 +10,7 @@ import java.io.File;
 public class Config {
 
     public static final String WhatsAppDirectoryPath = new File(Environment.getExternalStorageDirectory() +
-        File.separator + "Android/media/com.whatsapp/WhatsApp/Media/.Statuses").toString();
+        File.separator + "Android/media/com.whatsapp/WhatsApp/Media/.Statuses" + File.separator).toString();
 
     public static final String WhatsAppSaveStatus = "/storage/emulated/0/WhatsAppStatusesDir/Media/WhatsApp/";
 
