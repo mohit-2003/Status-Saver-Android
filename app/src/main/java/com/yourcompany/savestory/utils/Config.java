@@ -2,16 +2,16 @@ package com.yourcompany.savestory.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
+
+import java.io.File;
 
 
 public class Config {
-	
-	
-	//Downloaded From :	https://nulledsourcecode.com/
-	//Contact us for reskin and making custom android app: https://nulledsourcecode.com/submit-ticket/
 
-	
-    public static final String WhatsAppDirectoryPath = "/storage/emulated/0/WhatsApp/Media/.Statuses/";
+    public static final String WhatsAppDirectoryPath = new File(Environment.getExternalStorageDirectory() +
+        File.separator + "Android/media/com.whatsapp/WhatsApp/Media/.Statuses").toString();
+
     public static final String WhatsAppSaveStatus = "/storage/emulated/0/WhatsAppStatusesDir/Media/WhatsApp/";
 
     public static final String GBWhatsAppDirectoryPath = "/storage/emulated/0/GWAActivity/Media/.Statuses/";

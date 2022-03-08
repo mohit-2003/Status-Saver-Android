@@ -58,11 +58,12 @@ public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.On
 
     public void loadData() {
         data = new ArrayList<>();
+        Log.d("mohit", "loadData: "+Config.WhatsAppDirectoryPath);
         final String path = Config.WhatsAppDirectoryPath;
         File directory = new File(path);
         if (directory.exists()) {
             final File[] files = directory.listFiles();
-            Log.d("Files", "Size: " + files.length);
+//            Log.d("Files", "Size: " + files.length);
             final String[] paths = {""};
             new AsyncTask<Void, Void, Void>() {
                 @Override

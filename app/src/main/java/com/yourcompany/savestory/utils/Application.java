@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 
-import com.onesignal.OneSignal;
-
-
 public class Application extends android.app.Application {
 	
 	//Downloaded From :	https://nulledsourcecode.com/
@@ -35,12 +32,6 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
 
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .autoPromptLocation(true)
-
-                .init();
-        instance = this;
         initApp();
     }
 
