@@ -37,8 +37,6 @@ public class BWAActivity extends AppCompatActivity {
             }
         });
         toolbar.setTitle("WhatsApp Business Status");
-        //setSupportActionBar(toolbar);
-
 
         viewPager = findViewById(R.id.viewPager);
         viewPager.setOffscreenPageLimit(0);
@@ -46,8 +44,6 @@ public class BWAActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-
 
     }
 
