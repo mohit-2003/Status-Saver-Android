@@ -1,23 +1,24 @@
-package com.yourcompany.savestory.activity;
+package com.example.savestatus.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.Toast;
+import android.widget.VideoView;
 
-import com.bumptech.glide.Glide;
-import com.yourcompany.savestory.R;
-import com.yourcompany.savestory.utils.Config;
+import com.example.savestatus.R;
+import com.example.savestatus.utils.Config;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,35 +26,49 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
-public class ImageViewerActivity extends AppCompatActivity {
+public class VIdeoViewerActivity extends AppCompatActivity {
 
-    private final String TAG = "ImageViewer";
+    private final String TAG = "VideoViewer";
     public LinearLayout btn_download, btn_share, btn_re_post;
     public ImageButton img_btn_download, img_btn_share, img_re_post;
     public int count = Config.count;
-    String image_path = "", path = "", atype = "", package_name = "";
+    String videoPath = "", path = "", atype = "", package_name = "";
     String type = "";
-    ImageView imageView;
+    VideoView video_view;
     String listenerValue = "";
     DrawerActivity drawer = new DrawerActivity();
+    private int position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image);
-
-        imageView = findViewById(R.id.imageView);
+        setContentView(R.layout.activity_video);
+        video_view = findViewById(R.id.video_view);
 
         Intent intent = getIntent();
         if (intent != null) {
-            image_path = intent.getStringExtra("image");
+            videoPath = intent.getStringExtra("video");
             type = intent.getStringExtra("type");
             atype = intent.getStringExtra("atype");
+            video_view.setVideoPath(videoPath);
+            video_view.start();
+        }
+        MediaController mediaController = new MediaController(this);
+        video_view.setMediaController(mediaController);
+        try {
+            video_view.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    video_view.seekTo(position);
+                    if (position == 0) {
+                        video_view.start();
+                    } else {
+                        video_view.resume();
 
-            if (image_path != null) {
-                Glide.with(this).load(image_path)
-                        .into(imageView);
-            }
+                    }
+                }
+            });
+        } catch (Exception ex) {
         }
 
         if (type.equals("0")) {
@@ -70,7 +85,6 @@ public class ImageViewerActivity extends AppCompatActivity {
 
         }
 
-
         btn_download = findViewById(R.id.btn_download);
         btn_download.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,11 +92,12 @@ public class ImageViewerActivity extends AppCompatActivity {
                    /* type == 0 (WhatsApp Normal)
                     type == 1 (WhatsApp GB)
                     type == 2 (WhatsApp Business)*/
-                copyFileOrDirectory(image_path, path);
+                copyFileOrDirectory(videoPath, path);
 
                 sharePerAds();
             }
         });
+
         img_btn_download = findViewById(R.id.img_btn_download);
         img_btn_download.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,22 +105,22 @@ public class ImageViewerActivity extends AppCompatActivity {
                    /* type == 0 (WhatsApp Normal)
                     type == 1 (WhatsApp GB)
                     type == 2 (WhatsApp Business)*/
-                copyFileOrDirectory(image_path, path);
+                copyFileOrDirectory(videoPath, path);
 
                 sharePerAds();
+
             }
         });
-
 
         btn_share = findViewById(R.id.btn_share);
         btn_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (image_path.endsWith(".jpg")) {
-                    shareVia("image/jpg", image_path);
-                } else if (image_path.endsWith(".mp4")) {
-                    shareVia("video/mp4", image_path);
+                if (videoPath.endsWith(".jpg")) {
+                    shareVia("image/jpg", videoPath);
+                } else if (videoPath.endsWith(".mp4")) {
+                    shareVia("video/mp4", videoPath);
                 }
 
                 sharePerAds();
@@ -117,10 +132,10 @@ public class ImageViewerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (image_path.endsWith(".jpg")) {
-                    shareVia("image/jpg", image_path);
-                } else if (image_path.endsWith(".mp4")) {
-                    shareVia("video/mp4", image_path);
+                if (videoPath.endsWith(".jpg")) {
+                    shareVia("image/jpg", videoPath);
+                } else if (videoPath.endsWith(".mp4")) {
+                    shareVia("video/mp4", videoPath);
                 }
 
                 sharePerAds();
@@ -128,21 +143,18 @@ public class ImageViewerActivity extends AppCompatActivity {
             }
         });
 
-
         btn_re_post = findViewById(R.id.btn_re_post);
         btn_re_post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (image_path.endsWith(".jpg")) {
-
-                    shareViaWhatsApp("image/jpg", image_path, package_name);
-                } else if (image_path.endsWith(".mp4")) {
-
-                    shareViaWhatsApp("video/mp4", image_path, package_name);
+                if (videoPath.endsWith(".jpg")) {
+                    shareViaWhatsApp("image/jpg", videoPath, package_name);
+                } else if (videoPath.endsWith(".mp4")) {
+                    shareViaWhatsApp("video/mp4", videoPath, package_name);
                 }
-                sharePerAds();
 
+                sharePerAds();
 
             }
         });
@@ -151,15 +163,14 @@ public class ImageViewerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (image_path.endsWith(".jpg")) {
-
-                    shareViaWhatsApp("image/jpg", image_path, package_name);
-                } else if (image_path.endsWith(".mp4")) {
-
-                    shareViaWhatsApp("video/mp4", image_path, package_name);
+                if (videoPath.endsWith(".jpg")) {
+                    shareViaWhatsApp("image/jpg", videoPath, package_name);
+                } else if (videoPath.endsWith(".mp4")) {
+                    shareViaWhatsApp("video/mp4", videoPath, package_name);
                 }
 
                 sharePerAds();
+
             }
         });
 
@@ -171,6 +182,23 @@ public class ImageViewerActivity extends AppCompatActivity {
 
         sharePerAds();
 
+
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("Position", video_view.getCurrentPosition());
+        video_view.pause();
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        position = savedInstanceState.getInt("Position");
+        video_view.seekTo(position);
 
     }
 
@@ -213,7 +241,7 @@ public class ImageViewerActivity extends AppCompatActivity {
             source = new FileInputStream(sourceFile).getChannel();
             destination = new FileOutputStream(destFile).getChannel();
             destination.transferFrom(source, 0, source.size());
-            Toast.makeText(getApplicationContext(), "Picture Saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Video Saved", Toast.LENGTH_SHORT).show();
         } finally {
             if (source != null) {
                 source.close();
@@ -230,12 +258,10 @@ public class ImageViewerActivity extends AppCompatActivity {
         File fileToShare = new File(path);
         Uri uri = Uri.fromFile(fileToShare);
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
-/*
-        sharingIntent.setPackage("com.whatsapp");//package name of the app
-*/
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
     }
+
 
     public void shareViaWhatsApp(String type, String path, String package_name) {
 
@@ -247,6 +273,7 @@ public class ImageViewerActivity extends AppCompatActivity {
         PackageManager pm = getPackageManager();
         try {
             PackageInfo info = pm.getPackageInfo(package_name, PackageManager.GET_META_DATA);
+
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType(type);
             File fileToShare = new File(path);
@@ -261,6 +288,12 @@ public class ImageViewerActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        video_view.start();
+        super.onResume();
+    }
+
 
     public void allSharedPreference(int i) {
         SharedPreferences preferences = getSharedPreferences("PREFRENCE", Context.MODE_PRIVATE);
@@ -271,8 +304,8 @@ public class ImageViewerActivity extends AppCompatActivity {
 
     public void sharePerAds() {
         int i;
-        if (Config.getALLState(ImageViewerActivity.this).length() > 0) {
-            i = Integer.parseInt(Config.getALLState(ImageViewerActivity.this));
+        if (Config.getALLState(VIdeoViewerActivity.this).length() > 0) {
+            i = Integer.parseInt(Config.getALLState(VIdeoViewerActivity.this));
             if (i > count) {
 
                 allSharedPreference(0);

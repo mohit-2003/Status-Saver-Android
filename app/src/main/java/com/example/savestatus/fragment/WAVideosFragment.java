@@ -1,4 +1,4 @@
-package com.yourcompany.savestory.fragment;
+package com.example.savestatus.fragment;
 
 
 import android.os.AsyncTask;
@@ -15,10 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.yourcompany.savestory.adaptor.WAVideosAdaptor;
-import com.yourcompany.savestory.model.ModelStatus;
-import com.yourcompany.savestory.R;
-import com.yourcompany.savestory.utils.Config;
+import com.example.savestatus.adaptor.WAVideosAdaptor;
+import com.example.savestatus.model.ModelStatus;
+import com.example.savestatus.R;
+import com.example.savestatus.utils.Config;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,15 +27,14 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GWAVideosFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class WAVideosFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     ArrayList<ModelStatus> data;
     RecyclerView rv;
     TextView textView;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-
-    public GWAVideosFragment() {
+    public WAVideosFragment() {
         // Required empty public constructor
     }
 
@@ -57,13 +56,12 @@ public class GWAVideosFragment extends Fragment implements SwipeRefreshLayout.On
 
     public void loadData() {
         data = new ArrayList<>();
-        final String path = Config.GBWhatsAppDirectoryPath;
+        final String path = Config.WhatsAppDirectoryPath;
         File directory = new File(path);
         if (directory.exists()) {
             final File[] files = directory.listFiles();
             Log.d("Files", "Size: " + files.length);
             final String[] paths = {""};
-
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(Void... voids) {
@@ -71,8 +69,8 @@ public class GWAVideosFragment extends Fragment implements SwipeRefreshLayout.On
                         Log.d("Files", "FileName:" + files[i].getName());
                         Log.d("Files", "FileName:" + files[i].getName().substring(0, files[i].getName().length() - 4));
                         if (files[i].getName().endsWith(".mp4")) {
-                            paths[0] = path + "" + files[i].getName();
-                            ModelStatus modelStatus = new ModelStatus(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 1);
+                            paths[0] = path + "/" + files[i].getName();
+                            ModelStatus modelStatus = new ModelStatus(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
                             data.add(modelStatus);
                         }
                     }
@@ -98,7 +96,7 @@ public class GWAVideosFragment extends Fragment implements SwipeRefreshLayout.On
             textView.setVisibility(View.VISIBLE);
             textView.setText("No Status Available \n Check Out some Status & come back again...");
 
-            Snackbar.make(getActivity().findViewById(android.R.id.content), "GWAActivity Not Installed",
+            Snackbar.make(getActivity().findViewById(android.R.id.content), "WhatsApp Not Installed",
                     Snackbar.LENGTH_SHORT).show();
         }
         refreshItems();

@@ -1,4 +1,4 @@
-package com.yourcompany.savestory.model;
+package com.example.savestatus.model;
 
 public class ModelStatus {
 

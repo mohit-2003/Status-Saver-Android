@@ -1,14 +1,9 @@
-package com.yourcompany.savestory.activity;
+package com.example.savestatus.activity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,16 +11,12 @@ import android.os.StrictMode;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AlertDialog;
 
-import android.util.Log;
 import android.widget.Toast;
 
-import com.yourcompany.savestory.utils.ForceUpdateAsync;
-import com.yourcompany.savestory.R;
+import com.example.savestatus.R;
 
 import java.lang.reflect.Method;
-import java.util.concurrent.ExecutionException;
 
 public class SplashActivity extends Activity {
 

@@ -1,4 +1,4 @@
-package com.yourcompany.savestory.utils;
+package com.example.savestatus.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

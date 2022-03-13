@@ -1,4 +1,4 @@
-package com.yourcompany.savestory.fragment;
+package com.example.savestatus.fragment;
 
 
 import android.os.AsyncTask;
@@ -10,17 +10,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.yourcompany.savestory.adaptor.WAPictureAdaptor;
-import com.yourcompany.savestory.model.ModelStatus;
-import com.yourcompany.savestory.R;
-import com.yourcompany.savestory.utils.Config;
+import com.example.savestatus.adaptor.WAPictureAdaptor;
+import com.example.savestatus.model.ModelStatus;
+import com.example.savestatus.R;
+import com.example.savestatus.utils.Config;
 
 import java.io.File;
 import java.util.ArrayList;

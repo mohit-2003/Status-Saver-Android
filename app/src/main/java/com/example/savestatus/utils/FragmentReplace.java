@@ -1,4 +1,4 @@
-package com.yourcompany.savestory.utils;
+package com.example.savestatus.utils;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;

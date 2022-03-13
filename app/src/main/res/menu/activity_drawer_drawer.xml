@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_whatsapp"
-            android:icon="@drawable/ic_action_filter_none"
-            android:title="@string/whatsapp" />
+    <item
+        android:id="@+id/nav_share"
+        android:icon="@drawable/ic_action_share_white"
+        android:title="@string/share"
+        app:showAsAction="ifRoom"/>
 
-        <item
-            android:id="@+id/nav_gb"
-            android:icon="@drawable/ic_action_gb_whatsapp"
-            android:title="@string/gb_whatsapp" />
+    <item
+        android:id="@+id/nav_whatsapp"
+        android:icon="@drawable/ic_action_filter_none"
+        android:title="@string/whatsapp" />
 
-        <item
-            android:id="@+id/nav_business"
-            android:icon="@drawable/ic_action_filter"
-            android:title="@string/whatsapp_business" />
+    <item
+        android:id="@+id/nav_gb"
+        android:icon="@drawable/ic_action_gb_whatsapp"
+        android:title="@string/gb_whatsapp" />
 
-    </group>
+    <item
+        android:id="@+id/nav_business"
+        android:icon="@drawable/ic_action_filter"
+        android:title="@string/whatsapp_business" />
 
-    <item android:title="Other">
-        <menu>
-            <item
-                android:id="@+id/nav_help"
-                android:icon="@drawable/ic_action_how_its_work"
-                android:title="@string/how_to_use" />
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_action_share"
-                android:title="@string/share" />
-
-        </menu>
-    </item>
+    <item
+        android:id="@+id/nav_mode"
+        android:icon="@drawable/ic_action_how_its_work"
+        android:title="@string/change_mode" />
 
 </menu>

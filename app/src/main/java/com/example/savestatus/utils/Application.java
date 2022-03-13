@@ -1,4 +1,4 @@
-package com.yourcompany.savestory.utils;
+package com.example.savestatus.utils;
 
 import android.app.Activity;
 import android.content.Context;

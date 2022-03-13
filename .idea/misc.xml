@@ -3,14 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/activity_drawer.xml" value="0.13125" />
+        <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/activity_drawer.xml" value="0.264" />
         <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/activity_gb.xml" value="0.31510658016682114" />
-        <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/activity_how_it_works.xml" value="0.13125" />
+        <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/activity_how_it_works.xml" value="0.264" />
+        <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/activity_image.xml" value="0.25416666666666665" />
         <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
         <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/activity_video.xml" value="0.25416666666666665" />
         <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/app_bar_drawer.xml" value="0.25416666666666665" />
-        <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/content_drawer.xml" value="0.31510658016682114" />
+        <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/content_drawer.xml" value="0.264" />
         <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/fragment_save_pictures.xml" value="0.25416666666666665" />
         <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/fragment_status_pics.xml" value="0.25416666666666665" />
         <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/fragment_status_videos.xml" value="0.25416666666666665" />
@@ -18,7 +19,8 @@
         <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/item_saved_pictures.xml" value="0.25416666666666665" />
         <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/item_videos.xml" value="0.25416666666666665" />
         <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/layout/nav_header_drawer.xml" value="0.25416666666666665" />
-        <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/menu/activity_drawer_drawer.xml" value="0.25416666666666665" />
+        <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/menu/activity_drawer_drawer.xml" value="0.264" />
+        <entry key="..\:/M Project/Android/Whatsapp Status Saver/app/src/main/res/menu/drawer.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

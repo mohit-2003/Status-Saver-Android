@@ -1,4 +1,4 @@
-package com.yourcompany.savestory.adaptor;
+package com.example.savestatus.adaptor;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.yourcompany.savestory.activity.DrawerActivity;
-import com.yourcompany.savestory.model.ModelStatus;
-import com.yourcompany.savestory.R;
-import com.yourcompany.savestory.utils.Config;
-import com.yourcompany.savestory.activity.VIdeoViewerActivity;
+import com.example.savestatus.activity.DrawerActivity;
+import com.example.savestatus.model.ModelStatus;
+import com.example.savestatus.R;
+import com.example.savestatus.utils.Config;
+import com.example.savestatus.activity.VIdeoViewerActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +28,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.List;
 
 public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyViewHolder> {
 	

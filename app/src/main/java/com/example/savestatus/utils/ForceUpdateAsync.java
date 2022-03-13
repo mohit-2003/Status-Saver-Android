@@ -1,4 +1,4 @@
-package com.yourcompany.savestory.utils;
+package com.example.savestatus.utils;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;

@@ -1,11 +1,11 @@
-package com.yourcompany.savestory.activity;
+package com.example.savestatus.activity;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
-import com.yourcompany.savestory.R;
+import com.example.savestatus.R;
 
 public class HelpActivity extends AppCompatActivity {
 

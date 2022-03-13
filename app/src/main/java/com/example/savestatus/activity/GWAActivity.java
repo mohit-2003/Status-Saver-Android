@@ -1,4 +1,4 @@
-package com.yourcompany.savestory.activity;
+package com.example.savestatus.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
-import com.yourcompany.savestory.R;
-import com.yourcompany.savestory.fragment.GWAPictureFragment;
-import com.yourcompany.savestory.fragment.GWASaveFragment;
-import com.yourcompany.savestory.fragment.GWAVideosFragment;
+import com.example.savestatus.R;
+import com.example.savestatus.fragment.GWAPictureFragment;
+import com.example.savestatus.fragment.GWASaveFragment;
+import com.example.savestatus.fragment.GWAVideosFragment;
 
 import java.util.ArrayList;
 import java.util.List;

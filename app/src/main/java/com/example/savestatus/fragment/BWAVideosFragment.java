@@ -1,4 +1,5 @@
-package com.yourcompany.savestory.fragment;
+package com.example.savestatus.fragment;
+
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,16 +15,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.yourcompany.savestory.adaptor.WAPictureAdaptor;
-import com.yourcompany.savestory.model.ModelStatus;
-import com.yourcompany.savestory.R;
-import com.yourcompany.savestory.utils.Config;
+import com.example.savestatus.adaptor.WAVideosAdaptor;
+import com.example.savestatus.model.ModelStatus;
+import com.example.savestatus.R;
+import com.example.savestatus.utils.Config;
 
 import java.io.File;
 import java.util.ArrayList;
 
 
-public class BWAPictureFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class BWAVideosFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     ArrayList<ModelStatus> data;
     RecyclerView rv;
@@ -31,7 +35,7 @@ public class BWAPictureFragment extends Fragment implements SwipeRefreshLayout.O
     SwipeRefreshLayout mSwipeRefreshLayout;
 
 
-    public BWAPictureFragment() {
+    public BWAVideosFragment() {
         // Required empty public constructor
     }
 
@@ -39,17 +43,17 @@ public class BWAPictureFragment extends Fragment implements SwipeRefreshLayout.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_status_pics, container, false);
+        View view = inflater.inflate(R.layout.fragment_status_videos, container, false);
         rv = view.findViewById(R.id.rv_status);
         mSwipeRefreshLayout = view.findViewById(R.id.contentView);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         textView = view.findViewById(R.id.textView);
         rv.setHasFixedSize(true);
 
+
         loadData();
 
         return view;
-
     }
 
     public void loadData() {
@@ -57,6 +61,7 @@ public class BWAPictureFragment extends Fragment implements SwipeRefreshLayout.O
         final String path = Config.WhatsAppBusinessDirectoryPath;
         File directory = new File(path);
         if (directory.exists()) {
+
             final File[] files = directory.listFiles();
             Log.d("Files", "Size: " + files.length);
             final String[] paths = {""};
@@ -67,7 +72,7 @@ public class BWAPictureFragment extends Fragment implements SwipeRefreshLayout.O
                     for (int i = 0; i < files.length; i++) {
                         Log.d("Files", "FileName:" + files[i].getName());
                         Log.d("Files", "FileName:" + files[i].getName().substring(0, files[i].getName().length() - 4));
-                        if (files[i].getName().endsWith(".jpg") || files[i].getName().endsWith("gif")) {
+                        if (files[i].getName().endsWith(".mp4")) {
                             paths[0] = path + "" + files[i].getName();
                             ModelStatus modelStatus = new ModelStatus(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 2);
                             data.add(modelStatus);
@@ -83,7 +88,7 @@ public class BWAPictureFragment extends Fragment implements SwipeRefreshLayout.O
                         textView.setVisibility(View.VISIBLE);
                         textView.setText("No Status Available \n Check Out some Status & come back again...");
                     }
-                    WAPictureAdaptor adapter = new WAPictureAdaptor(getActivity(), data);
+                    WAVideosAdaptor adapter = new WAVideosAdaptor(getActivity(), data);
                     rv.setAdapter(adapter);
 
                     LinearLayoutManager llm = new GridLayoutManager(getActivity(), 2);
@@ -98,7 +103,6 @@ public class BWAPictureFragment extends Fragment implements SwipeRefreshLayout.O
 
             Snackbar.make(getActivity().findViewById(android.R.id.content), "WhatsApp Business Not Installed",
                     Snackbar.LENGTH_SHORT).show();
-
         }
         refreshItems();
     }
@@ -115,5 +119,6 @@ public class BWAPictureFragment extends Fragment implements SwipeRefreshLayout.O
     public void onItemsLoadComplete() {
         mSwipeRefreshLayout.setRefreshing(false);
     }
+
 
 }
