@@ -85,7 +85,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
 
         public CardView mCardView;
         public ImageView imageView;
-        public LinearLayout btn_delete, btn_share;
+        public LinearLayout btn_delete, btn_share, btn_download;
         public ImageButton img_btn_delete, img_btn_share;
 
 
@@ -95,14 +95,19 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
 
             imageView = v.findViewById(R.id.imageView);
 
+            btn_download = v.findViewById(R.id.btn_download);
+            btn_download.setVisibility(View.GONE);
+
             btn_delete = v.findViewById(R.id.btn_delete);
+            btn_delete.setVisibility(View.VISIBLE);
             btn_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
                         ModelStatus modelStatus = arrayList.get(getAdapterPosition());
                         deleteFile(modelStatus.getFull_path(), getAdapterPosition());
-                    } catch (ArrayIndexOutOfBoundsException ex) {
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        e.printStackTrace();
                     }
 
                     

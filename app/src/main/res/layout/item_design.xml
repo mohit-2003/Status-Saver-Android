@@ -14,7 +14,6 @@
         card_view:cardCornerRadius="4dp"
         card_view:elevation="5dp">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/bottom_design">
+                android:background="@drawable/bottom_bg">
 
                 <LinearLayout
                     android:id="@+id/btn_share"
@@ -40,7 +39,6 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentBottom="true"
                     android:layout_weight="1"
-                    android:background="@android:color/transparent"
                     android:gravity="center"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp">
@@ -57,9 +55,7 @@
                     android:id="@+id/btn_download"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
                     android:layout_weight="1"
-                    android:background="@android:color/transparent"
                     android:gravity="center"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp">
@@ -70,6 +66,26 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/colorLightWhite"
                         android:background="@drawable/ic_action_download" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:visibility="gone"
+                    android:paddingBottom="10dp">
+
+                    <ImageButton
+                        android:id="@+id/img_btn_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorLightWhite"
+                        android:background="@drawable/ic_action_delete" />
 
                 </LinearLayout>
 

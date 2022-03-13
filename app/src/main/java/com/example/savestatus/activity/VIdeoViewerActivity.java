@@ -52,8 +52,6 @@ public class VIdeoViewerActivity extends AppCompatActivity {
             video_view.setVideoPath(videoPath);
             video_view.start();
         }
-        MediaController mediaController = new MediaController(this);
-        video_view.setMediaController(mediaController);
         try {
             video_view.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
@@ -67,21 +65,27 @@ public class VIdeoViewerActivity extends AppCompatActivity {
                     }
                 }
             });
-        } catch (Exception ex) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        video_view.setOnCompletionListener(MediaPlayer::start);
 
-        if (type.equals("0")) {
-            path = Config.WhatsAppSaveStatus;
-            package_name = "com.whatsapp";
+        switch (type) {
+            case "0":
+                path = Config.WhatsAppSaveStatus;
+                package_name = "com.whatsapp";
 
-        } else if (type.equals("1")) {
-            path = Config.GBWhatsAppSaveStatus;
-            package_name = "com.gbwhatsapp";
+                break;
+            case "1":
+                path = Config.GBWhatsAppSaveStatus;
+                package_name = "com.gbwhatsapp";
 
-        } else if (type.equals("2")) {
-            path = Config.WhatsAppBusinessSaveStatus;
-            package_name = "com.whatsapp.w4b";
+                break;
+            case "2":
+                path = Config.WhatsAppBusinessSaveStatus;
+                package_name = "com.whatsapp.w4b";
 
+                break;
         }
 
         btn_download = findViewById(R.id.btn_download);

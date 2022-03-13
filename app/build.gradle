@@ -3,16 +3,10 @@ apply plugin: 'com.android.application'
 
 android {
 
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
-
-
     compileSdkVersion 31
     defaultConfig {
         applicationId "com.example.savestatus"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"

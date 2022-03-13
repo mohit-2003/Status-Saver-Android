@@ -10,22 +10,18 @@
 
     <item
         android:id="@+id/nav_whatsapp"
-        android:icon="@drawable/ic_action_filter_none"
         android:title="@string/whatsapp" />
 
     <item
         android:id="@+id/nav_gb"
-        android:icon="@drawable/ic_action_gb_whatsapp"
         android:title="@string/gb_whatsapp" />
 
     <item
         android:id="@+id/nav_business"
-        android:icon="@drawable/ic_action_filter"
         android:title="@string/whatsapp_business" />
 
     <item
         android:id="@+id/nav_mode"
-        android:icon="@drawable/ic_action_how_its_work"
         android:title="@string/change_mode" />
 
 </menu>
