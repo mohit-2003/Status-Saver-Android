@@ -30,12 +30,10 @@ public class ImageViewerActivity extends AppCompatActivity {
     private final String TAG = "ImageViewer";
     public LinearLayout btn_download, btn_share, btn_re_post;
     public ImageButton img_btn_download, img_btn_share, img_re_post;
-    public int count = Config.count;
     String image_path = "", path = "", atype = "", package_name = "";
     String type = "";
     ImageView imageView;
     String listenerValue = "";
-    DrawerActivity drawer = new DrawerActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +78,6 @@ public class ImageViewerActivity extends AppCompatActivity {
                     type == 2 (WhatsApp Business)*/
                 copyFileOrDirectory(image_path, path);
 
-                sharePerAds();
             }
         });
         img_btn_download = findViewById(R.id.img_btn_download);
@@ -92,7 +89,6 @@ public class ImageViewerActivity extends AppCompatActivity {
                     type == 2 (WhatsApp Business)*/
                 copyFileOrDirectory(image_path, path);
 
-                sharePerAds();
             }
         });
 
@@ -108,7 +104,6 @@ public class ImageViewerActivity extends AppCompatActivity {
                     shareVia("video/mp4", image_path);
                 }
 
-                sharePerAds();
 
             }
         });
@@ -123,7 +118,6 @@ public class ImageViewerActivity extends AppCompatActivity {
                     shareVia("video/mp4", image_path);
                 }
 
-                sharePerAds();
 
             }
         });
@@ -141,7 +135,6 @@ public class ImageViewerActivity extends AppCompatActivity {
 
                     shareViaWhatsApp("video/mp4", image_path, package_name);
                 }
-                sharePerAds();
 
 
             }
@@ -159,7 +152,6 @@ public class ImageViewerActivity extends AppCompatActivity {
                     shareViaWhatsApp("video/mp4", image_path, package_name);
                 }
 
-                sharePerAds();
             }
         });
 
@@ -169,7 +161,6 @@ public class ImageViewerActivity extends AppCompatActivity {
             btn_download.setVisibility(View.VISIBLE);
         }
 
-        sharePerAds();
 
 
     }
@@ -261,30 +252,4 @@ public class ImageViewerActivity extends AppCompatActivity {
         }
     }
 
-
-    public void allSharedPreference(int i) {
-        SharedPreferences preferences = getSharedPreferences("PREFRENCE", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("ALL", String.valueOf(i));
-        editor.commit();
-    }
-
-    public void sharePerAds() {
-        int i;
-        if (Config.getALLState(ImageViewerActivity.this).length() > 0) {
-            i = Integer.parseInt(Config.getALLState(ImageViewerActivity.this));
-            if (i > count) {
-
-                allSharedPreference(0);
-            } else {
-                i++;
-                allSharedPreference(i);
-            }
-        } else {
-            i = 1;
-            allSharedPreference(i);
-        }
-        listenerValue = String.valueOf(i);
-
-    }
 }

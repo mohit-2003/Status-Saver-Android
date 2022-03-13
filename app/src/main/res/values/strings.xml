@@ -1,9 +1,6 @@
 <resources>
-    <string name="app_name">Story Saver For WhatsApp</string>
-    <string name="title_activity_drawer">WhatsAppStatus</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="app_description" translatable="false">Story Saver For WhatsApp</string>
+    <string name="app_name">Status Saver For WhatsApp</string>
+    <string name="title_activity_main">WhatsAppStatus</string>
 
     <string name="youAreNotUpdatedTitle">Update Available</string>
     <string name="youAreNotUpdatedMessage">A new version of WhatsApp Status Saver is available. Please update to version\s</string>

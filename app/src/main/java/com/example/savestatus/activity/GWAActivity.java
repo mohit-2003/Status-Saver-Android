@@ -21,7 +21,7 @@ import java.util.List;
 
 public class GWAActivity extends AppCompatActivity {
 
-    private final String TAG = DrawerActivity.class.getSimpleName();
+    private final String TAG = MainActivity.class.getSimpleName();
     private TabLayout tabLayout;
     private ViewPager viewPager;
 

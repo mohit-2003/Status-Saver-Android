@@ -10,16 +10,13 @@ import android.os.Handler;
 
 import androidx.annotation.RequiresApi;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -27,7 +24,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.savestatus.utils.ForceUpdateAsync;
 import com.example.savestatus.R;
 import com.example.savestatus.fragment.WAPictureFragment;
 import com.example.savestatus.fragment.WASaveFragment;
@@ -36,11 +32,9 @@ import com.example.savestatus.fragment.WAVideosFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrawerActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
-    private final String TAG = "DrawerTAG";
     boolean doubleBackToExitPressedOnce = false;
-    NavigationView navigationView;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
@@ -48,23 +42,10 @@ public class DrawerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drawer);
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("WhatsApp Status");
         setSupportActionBar(toolbar);
-//        int nightModeFlags = getResources().getConfiguration().uiMode &
-//                Configuration.UI_MODE_NIGHT_MASK;
-//        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES)
-//            menu.getItem(R.id.nav_mode).setTitle("Light Mode");
-//        else menu.getItem(R.id.nav_mode).setTitle("Dark Mode");
-//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.addDrawerListener(toggle);
-//        toggle.syncState();
-//
-//        navigationView = findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
 
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabs);
@@ -77,10 +58,6 @@ public class DrawerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             if (doubleBackToExitPressedOnce) {
                 finish();
@@ -105,7 +82,7 @@ public class DrawerActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_drawer_drawer, menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -118,9 +95,9 @@ public class DrawerActivity extends AppCompatActivity {
         } else if (id == R.id.nav_whatsapp) {
             Toast.makeText(this, "Already at home", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_gb) {
-            startActivity(new Intent(DrawerActivity.this, GWAActivity.class));
+            startActivity(new Intent(MainActivity.this, GWAActivity.class));
         } else if (id == R.id.nav_business) {
-            startActivity(new Intent(DrawerActivity.this, BWAActivity.class));
+            startActivity(new Intent(MainActivity.this, BWAActivity.class));
         } else if (id == R.id.nav_mode) {
             int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
             if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
@@ -139,10 +116,7 @@ public class DrawerActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
 
-        ForceUpdateAsync forceUpdateAsync = new ForceUpdateAsync(this);
-        forceUpdateAsync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(DrawerActivity.this, getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(MainActivity.this, getSupportFragmentManager());
         adapter.addFragment(new WAPictureFragment(), "Picture");
         adapter.addFragment(new WAVideosFragment(), "Videos");
         adapter.addFragment(new WASaveFragment(), "Saved");

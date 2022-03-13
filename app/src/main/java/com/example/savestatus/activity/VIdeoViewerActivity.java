@@ -31,12 +31,11 @@ public class VIdeoViewerActivity extends AppCompatActivity {
     private final String TAG = "VideoViewer";
     public LinearLayout btn_download, btn_share, btn_re_post;
     public ImageButton img_btn_download, img_btn_share, img_re_post;
-    public int count = Config.count;
     String videoPath = "", path = "", atype = "", package_name = "";
     String type = "";
     VideoView video_view;
     String listenerValue = "";
-    DrawerActivity drawer = new DrawerActivity();
+    MainActivity drawer = new MainActivity();
     private int position = 0;
 
     @Override
@@ -94,7 +93,7 @@ public class VIdeoViewerActivity extends AppCompatActivity {
                     type == 2 (WhatsApp Business)*/
                 copyFileOrDirectory(videoPath, path);
 
-                sharePerAds();
+                
             }
         });
 
@@ -107,7 +106,7 @@ public class VIdeoViewerActivity extends AppCompatActivity {
                     type == 2 (WhatsApp Business)*/
                 copyFileOrDirectory(videoPath, path);
 
-                sharePerAds();
+                
 
             }
         });
@@ -123,7 +122,7 @@ public class VIdeoViewerActivity extends AppCompatActivity {
                     shareVia("video/mp4", videoPath);
                 }
 
-                sharePerAds();
+                
 
             }
         });
@@ -138,7 +137,7 @@ public class VIdeoViewerActivity extends AppCompatActivity {
                     shareVia("video/mp4", videoPath);
                 }
 
-                sharePerAds();
+                
 
             }
         });
@@ -154,7 +153,7 @@ public class VIdeoViewerActivity extends AppCompatActivity {
                     shareViaWhatsApp("video/mp4", videoPath, package_name);
                 }
 
-                sharePerAds();
+                
 
             }
         });
@@ -169,7 +168,6 @@ public class VIdeoViewerActivity extends AppCompatActivity {
                     shareViaWhatsApp("video/mp4", videoPath, package_name);
                 }
 
-                sharePerAds();
 
             }
         });
@@ -180,7 +178,7 @@ public class VIdeoViewerActivity extends AppCompatActivity {
             btn_download.setVisibility(View.VISIBLE);
         }
 
-        sharePerAds();
+        
 
 
     }
@@ -292,32 +290,5 @@ public class VIdeoViewerActivity extends AppCompatActivity {
     protected void onResume() {
         video_view.start();
         super.onResume();
-    }
-
-
-    public void allSharedPreference(int i) {
-        SharedPreferences preferences = getSharedPreferences("PREFRENCE", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("ALL", String.valueOf(i));
-        editor.commit();
-    }
-
-    public void sharePerAds() {
-        int i;
-        if (Config.getALLState(VIdeoViewerActivity.this).length() > 0) {
-            i = Integer.parseInt(Config.getALLState(VIdeoViewerActivity.this));
-            if (i > count) {
-
-                allSharedPreference(0);
-            } else {
-                i++;
-                allSharedPreference(i);
-            }
-        } else {
-            i = 1;
-            allSharedPreference(i);
-        }
-        listenerValue = String.valueOf(i);
-
     }
 }

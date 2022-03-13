@@ -17,7 +17,6 @@
 
     <application
         android:allowBackup="true"
-        android:name="com.example.savestatus.utils.Application"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true"
@@ -36,8 +35,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.savestatus.activity.DrawerActivity"
-            android:label="@string/title_activity_drawer"
+            android:name="com.example.savestatus.activity.MainActivity"
+            android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.example.savestatus.activity.GWAActivity"
@@ -54,10 +53,6 @@
             android:name="com.example.savestatus.activity.VIdeoViewerActivity"
             android:configChanges="orientation"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.example.savestatus.activity.HelpActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
 
 
     </application>

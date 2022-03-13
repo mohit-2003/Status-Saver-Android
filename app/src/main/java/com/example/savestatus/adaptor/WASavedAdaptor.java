@@ -2,7 +2,6 @@ package com.example.savestatus.adaptor;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,11 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.savestatus.activity.DrawerActivity;
 import com.bumptech.glide.Glide;
 import com.example.savestatus.model.ModelStatus;
 import com.example.savestatus.R;
-import com.example.savestatus.utils.Config;
 import com.example.savestatus.activity.ImageViewerActivity;
 import com.example.savestatus.activity.VIdeoViewerActivity;
 
@@ -28,10 +25,6 @@ import java.util.ArrayList;
 
 public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHolder> {
 
-    private final String TAG = "SAVEAdaptor";
-    public int count = Config.count;
-    String listenerValue = "";
-    DrawerActivity drawer = new DrawerActivity();
     private Context acontext;
     private ArrayList<ModelStatus> arrayList;
 
@@ -42,9 +35,8 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
 
     @Override
     public WASavedAdaptor.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_saved_pictures, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
-        return vh;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_design, parent, false);
+        return new MyViewHolder(v);
     }
 
     @Override
@@ -89,31 +81,6 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
         notifyItemRangeChanged(position, arrayList.size());
     }
 
-    public void allSharedPreference(int i) {
-        SharedPreferences preferences = acontext.getSharedPreferences("PREFRENCE", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("ALL", String.valueOf(i));
-        editor.commit();
-    }
-
-    public void sharePerAds() {
-        int i;
-        if (Config.getALLState(acontext).length() > 0) {
-            i = Integer.parseInt(Config.getALLState(acontext));
-            if (i > count) {
-
-                allSharedPreference(0);
-            } else {
-                i++;
-                allSharedPreference(i);
-            }
-        } else {
-            i = 1;
-            allSharedPreference(i);
-        }
-        listenerValue = String.valueOf(i);
-    }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public CardView mCardView;
@@ -138,7 +105,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
                     } catch (ArrayIndexOutOfBoundsException ex) {
                     }
 
-                    sharePerAds();
+                    
                 }
             });
 
@@ -154,7 +121,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
                         shareVia("video/mp4", modelStatus.getFull_path());
                     }
 
-                    sharePerAds();
+                    
                 }
             });
             img_btn_share = v.findViewById(R.id.img_btn_share);
@@ -169,7 +136,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
                         shareVia("video/mp4", modelStatus.getFull_path());
                     }
 
-                    sharePerAds();
+                    
                 }
             });
 
@@ -183,7 +150,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
                     } catch (ArrayIndexOutOfBoundsException ex) {
                     }
 
-                    sharePerAds();
+                    
                 }
             });
 

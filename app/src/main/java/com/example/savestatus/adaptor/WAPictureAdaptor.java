@@ -2,7 +2,6 @@ package com.example.savestatus.adaptor;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.savestatus.activity.DrawerActivity;
 import com.bumptech.glide.Glide;
 import com.example.savestatus.model.ModelStatus;
 import com.example.savestatus.R;
@@ -31,10 +29,6 @@ import java.util.ArrayList;
 
 public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyViewHolder>{
 
-    private final String TAG = "PICTUREAdaptor";
-    public int count = Config.count;
-    String listenerValue = "";
-    DrawerActivity drawer = new DrawerActivity();
     private Context acontext;
     private ArrayList<ModelStatus> arrayList;
 
@@ -45,7 +39,7 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
 
     @Override
     public WAPictureAdaptor.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pictures, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_design, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
@@ -128,31 +122,6 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
 
     }
 
-    public void allSharedPreference(int i) {
-        SharedPreferences preferences = acontext.getSharedPreferences("PREFRENCE", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("ALL", String.valueOf(i));
-        editor.commit();
-    }
-
-    public void sharePerAds() {
-        int i;
-        if (Config.getALLState(acontext).length() > 0) {
-            i = Integer.parseInt(Config.getALLState(acontext));
-            if (i > count) {
-
-                allSharedPreference(0);
-            } else {
-                i++;
-                allSharedPreference(i);
-            }
-        } else {
-            i = 1;
-            allSharedPreference(i);
-        }
-        listenerValue = String.valueOf(i);
-    }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public CardView mCardView;
@@ -189,7 +158,7 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
                     }
                     copyFileOrDirectory(modelStatus.getFull_path(), path);
                     Toast.makeText(acontext,modelStatus.getFull_path(),Toast.LENGTH_SHORT).show();
-                    sharePerAds();
+                    
 
                 }
             });
@@ -206,7 +175,7 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
                         shareVia("video/mp4", modelStatus.getFull_path());
                     }
 
-                    sharePerAds();
+                    
 
 
                 }
@@ -222,7 +191,7 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
                     } else if (modelStatus.getFull_path().endsWith(".mp4")) {
                         shareVia("video/mp4", modelStatus.getFull_path());
                     }
-                    sharePerAds();
+                    
 
                 }
             });
@@ -271,7 +240,7 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
                   //  copyFileOrDirectory(modelStatus.getFull_path(), path);
                //     String hello = modelStatus.getFull_path();
                    // Toast.makeText(acontext,hello,Toast.LENGTH_SHORT).show();
-                    sharePerAds();
+                    
                 }
             });
 
