@@ -23,18 +23,18 @@ import com.example.savestatus.activity.VideoViewerActivity;
 import java.io.File;
 import java.util.ArrayList;
 
-public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHolder> {
+public class WASavedAdapter extends RecyclerView.Adapter<WASavedAdapter.MyViewHolder> {
 
     private Context acontext;
     private ArrayList<StatusModel> arrayList;
 
-    public WASavedAdaptor(Context context, ArrayList<StatusModel> arrayList) {
+    public WASavedAdapter(Context context, ArrayList<StatusModel> arrayList) {
         this.arrayList = arrayList;
         acontext = context;
     }
 
     @Override
-    public WASavedAdaptor.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WASavedAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_design, parent, false);
         return new MyViewHolder(v);
     }

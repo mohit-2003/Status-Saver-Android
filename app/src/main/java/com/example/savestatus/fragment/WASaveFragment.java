@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.savestatus.adapter.WASavedAdaptor;
+import com.example.savestatus.adapter.WASavedAdapter;
 import com.example.savestatus.model.StatusModel;
 import com.example.savestatus.R;
 import com.example.savestatus.utils.Config;
@@ -86,7 +86,7 @@ public class WASaveFragment extends Fragment implements SwipeRefreshLayout.OnRef
                         textView.setVisibility(View.VISIBLE);
                         textView.setText("No Status Available \n Check Out some Status & come back again...");
                     }
-                    WASavedAdaptor adapter = new WASavedAdaptor(getActivity(), data);
+                    WASavedAdapter adapter = new WASavedAdapter(getActivity(), data);
                     rv.setAdapter(adapter);
 
                     LinearLayoutManager llm = new GridLayoutManager(getActivity(), 2);

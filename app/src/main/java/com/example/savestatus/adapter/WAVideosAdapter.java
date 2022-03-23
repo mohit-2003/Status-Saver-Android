@@ -6,7 +6,6 @@ import android.net.Uri;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,21 +27,20 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
-public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyViewHolder> {
+public class WAVideosAdapter extends RecyclerView.Adapter<WAVideosAdapter.MyViewHolder> {
 
     private Context acontext;
     private ArrayList<StatusModel> arrayList;
 
-    public WAVideosAdaptor(Context context, ArrayList<StatusModel> arrayList) {
+    public WAVideosAdapter(Context context, ArrayList<StatusModel> arrayList) {
         this.arrayList = arrayList;
         acontext = context;
     }
 
     @Override
-    public WAVideosAdaptor.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WAVideosAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_design, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
-        return vh;
+        return new MyViewHolder(v);
     }
 
     @Override

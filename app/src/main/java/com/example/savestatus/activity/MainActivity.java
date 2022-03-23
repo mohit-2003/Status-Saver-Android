@@ -24,7 +24,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.savestatus.R;
-import com.example.savestatus.fragment.WAPictureFragment;
+import com.example.savestatus.fragment.WAImageFragment;
 import com.example.savestatus.fragment.WASaveFragment;
 import com.example.savestatus.fragment.WAVideosFragment;
 
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(MainActivity.this, getSupportFragmentManager());
-        adapter.addFragment(new WAPictureFragment(), "Picture");
+        adapter.addFragment(new WAImageFragment(), "Picture");
         adapter.addFragment(new WAVideosFragment(), "Videos");
         adapter.addFragment(new WASaveFragment(), "Saved");
         viewPager.setAdapter(adapter);

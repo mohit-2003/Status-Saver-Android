@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.savestatus.adapter.WAPictureAdaptor;
+import com.example.savestatus.adapter.WAImageAdapter;
 import com.example.savestatus.model.StatusModel;
 import com.example.savestatus.R;
 import com.example.savestatus.utils.Config;
@@ -28,15 +28,14 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class WAImageFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    ArrayList<StatusModel> data;
     RecyclerView rv;
     TextView textView;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
 
-    public WAPictureFragment() {
+    public WAImageFragment() {
         // Required empty public constructor
     }
 
@@ -58,7 +57,7 @@ public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.On
     }
 
     public void loadData() {
-        data = new ArrayList<>();
+        Config.imgList.clear();
         final String path = Config.WhatsAppDirectoryPath;
         File directory = new File(path);
         if (directory.exists()) {
@@ -73,7 +72,7 @@ public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.On
                         if (files[i].getName().endsWith(".jpg") || files[i].getName().endsWith("gif")) {
                             paths[0] = path + "/" + files[i].getName();
                             StatusModel modelStatus = new StatusModel(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
-                            data.add(modelStatus);
+                            Config.imgList.add(modelStatus);
                         }
                     }
                     return null;
@@ -82,11 +81,11 @@ public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.On
                 @Override
                 protected void onPostExecute(Void aVoid) {
                     super.onPostExecute(aVoid);
-                    if (!(data.toArray().length > 0)) {
+                    if (!(Config.videoList.toArray().length > 0)) {
                         textView.setVisibility(View.VISIBLE);
                         textView.setText("No Status Available \n Check Out some Status & come back again...");
                     }
-                    WAPictureAdaptor adapter = new WAPictureAdaptor(requireActivity(), data);
+                    WAImageAdapter adapter = new WAImageAdapter(requireActivity(), Config.imgList);
                     rv.setAdapter(adapter);
 
                     LinearLayoutManager llm = new GridLayoutManager(requireActivity(), 2);

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class VideoViewerActivity extends AppCompatActivity {
 
-    private int position = -1;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -27,18 +27,18 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
-public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyViewHolder>{
+public class WAImageAdapter extends RecyclerView.Adapter<WAImageAdapter.MyViewHolder>{
 
     private Context acontext;
     private ArrayList<StatusModel> arrayList;
 
-    public WAPictureAdaptor(Context context, ArrayList<StatusModel> arrayList) {
+    public WAImageAdapter(Context context, ArrayList<StatusModel> arrayList) {
         this.arrayList = arrayList;
         acontext = context;
     }
 
     @Override
-    public WAPictureAdaptor.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WAImageAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_design, parent, false);
         return new MyViewHolder(v);
     }
@@ -220,6 +220,7 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
                     intent.putExtra("image", modelStatus.getFull_path());
                     intent.putExtra("type", "" + modelStatus.getType());
                     intent.putExtra("atype", "1");
+                    intent.putExtra("position", getAbsoluteAdapterPosition());
                     acontext.startActivity(intent);
                 }
             });

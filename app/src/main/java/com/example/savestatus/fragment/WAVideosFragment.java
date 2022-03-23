@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.savestatus.R;
-import com.example.savestatus.adapter.WAVideosAdaptor;
+import com.example.savestatus.adapter.WAVideosAdapter;
 import com.example.savestatus.model.StatusModel;
 import com.example.savestatus.utils.Config;
 import com.google.android.material.snackbar.Snackbar;
@@ -78,7 +78,7 @@ public class WAVideosFragment extends Fragment implements SwipeRefreshLayout.OnR
                         textView.setVisibility(View.VISIBLE);
                         textView.setText("No Status Available \n Check Out some Status & come back again...");
                     }
-                    WAVideosAdaptor adapter = new WAVideosAdaptor(getActivity(), Config.videoList);
+                    WAVideosAdapter adapter = new WAVideosAdapter(getActivity(), Config.videoList);
                     rv.setAdapter(adapter);
 
                     LinearLayoutManager llm = new GridLayoutManager(getActivity(), 2);
