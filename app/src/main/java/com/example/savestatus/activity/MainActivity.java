@@ -3,7 +3,6 @@ package com.example.savestatus.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.option_menu, menu);
         return true;
     }
 
@@ -95,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.nav_whatsapp) {
             Toast.makeText(this, "Already at home", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_gb) {
-            startActivity(new Intent(MainActivity.this, GWAActivity.class));
+            Toast.makeText(this, "We are working on it..", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_business) {
-            startActivity(new Intent(MainActivity.this, BWAActivity.class));
+            Toast.makeText(this, "We are working on it..", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_mode) {
             int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
             if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {

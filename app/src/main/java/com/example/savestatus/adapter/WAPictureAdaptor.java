@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.savestatus.model.ModelStatus;
+import com.example.savestatus.model.StatusModel;
 import com.example.savestatus.R;
 import com.example.savestatus.utils.Config;
 import com.example.savestatus.activity.ImageViewerActivity;
@@ -30,9 +30,9 @@ import java.util.ArrayList;
 public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyViewHolder>{
 
     private Context acontext;
-    private ArrayList<ModelStatus> arrayList;
+    private ArrayList<StatusModel> arrayList;
 
-    public WAPictureAdaptor(Context context, ArrayList<ModelStatus> arrayList) {
+    public WAPictureAdaptor(Context context, ArrayList<StatusModel> arrayList) {
         this.arrayList = arrayList;
         acontext = context;
     }
@@ -40,13 +40,12 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
     @Override
     public WAPictureAdaptor.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_design, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
-        return vh;
+        return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ModelStatus current = arrayList.get(position);
+        StatusModel current = arrayList.get(position);
         Glide.with(acontext).load(current.getFull_path())
                 .into(holder.imageView);
     }
@@ -63,21 +62,13 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
             File dst = new File(dstDir, src.getName());
 
             if (src.isDirectory()) {
-
-                String files[] = src.list();
-                int filesLength = files.length;
-                for (int i = 0; i < filesLength; i++) {
-                    String src1 = (new File(src, files[i]).getPath());
+                String[] files = src.list();
+                for (String file : files) {
+                    String src1 = (new File(src, file).getPath());
                     String dst1 = dst.getPath();
                     copyFileOrDirectory(src1, dst1);
-
-                  //  Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,uri);
-                  //  mediaScanIntent.setData(Uri.fromFile(file));
-                  //  acontext.sendBroadcast(mediaScanIntent);
-
                 }
             } else {
-               // Toast.makeText(acontext,dst,Toast.LENGTH_SHORT).show();
                 copyFile(src, dst);
             }
         } catch (Exception e) {
@@ -100,8 +91,7 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
             source = new FileInputStream(sourceFile).getChannel();
             destination = new FileOutputStream(destFile).getChannel();
             destination.transferFrom(source, 0, source.size());
-           // Toast.makeText(acontext,dst1,Toast.LENGTH_SHORT).show();
-            Toast.makeText(acontext, "Picture Saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(acontext, "Picture Saved..", Toast.LENGTH_SHORT).show();
         } finally {
             if (source != null) {
                 source.close();
@@ -118,7 +108,7 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
         File fileToShare = new File(path);
         Uri uri = Uri.fromFile(fileToShare);
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        acontext.startActivity(Intent.createChooser(sharingIntent, "Share via"));
+        acontext.startActivity(Intent.createChooser(sharingIntent, "Share via.."));
 
     }
 
@@ -138,22 +128,17 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
             btn_download.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
                     String path = "";
-                   /* type == 0 (WhatsApp Normal)
-                    type == 1 (WhatsApp GB)
-                    type == 2 (WhatsApp Business)*/
+
                     if (modelStatus.getType() == 0) {
                         path = Config.WhatsAppSaveStatus;
-                   //     Toast.makeText(acontext,path,Toast.LENGTH_SHORT).show();
 
                     } else if (modelStatus.getType() == 1) {
                         path = Config.GBWhatsAppSaveStatus;
-                   //     Toast.makeText(acontext,path,Toast.LENGTH_SHORT).show();
 
                     } else if (modelStatus.getType() == 2) {
                         path = Config.WhatsAppBusinessSaveStatus;
-                  //      Toast.makeText(acontext,path,Toast.LENGTH_SHORT).show();
 
                     }
                     copyFileOrDirectory(modelStatus.getFull_path(), path);
@@ -167,7 +152,7 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
             btn_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
 
                     if (modelStatus.getFull_path().endsWith(".jpg")) {
                         shareVia("image/jpg", modelStatus.getFull_path());
@@ -184,7 +169,7 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
             img_btn_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
 
                     if (modelStatus.getFull_path().endsWith(".jpg")) {
                         shareVia("image/jpg", modelStatus.getFull_path());
@@ -200,24 +185,15 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
             img_btn_download.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
                     String path = "";
-                   /* type == 0 (WhatsApp Normal)
-                    type == 1 (WhatsApp GB)
-                    type == 2 (WhatsApp Business)*/
 
                     if (modelStatus.getType() == 0) {
                         path = Config.WhatsAppSaveStatus;
-                   //     Toast.makeText(acontext,path,Toast.LENGTH_SHORT).show();
-
                     } else if (modelStatus.getType() == 1) {
                         path = Config.GBWhatsAppSaveStatus;
-                   //     Toast.makeText(acontext,path,Toast.LENGTH_SHORT).show();
-
                     } else if (modelStatus.getType() == 2) {
                         path = Config.WhatsAppBusinessSaveStatus;
-                    //    Toast.makeText(acontext,path,Toast.LENGTH_SHORT).show();
-
                     }
 
                     if (modelStatus.getFull_path().endsWith(".jpg")) {
@@ -226,32 +202,20 @@ public class WAPictureAdaptor extends RecyclerView.Adapter<WAPictureAdaptor.MyVi
                         File hello2 = new File(hello);
 
                         acontext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(hello2)));
-                     //   Toast.makeText(acontext,hello,Toast.LENGTH_SHORT).show();
 
                     } else if (modelStatus.getFull_path().endsWith(".mp4")) {
                         copyFileOrDirectory(modelStatus.getFull_path(), path);
                         String hello = path+modelStatus.getPath()+".mp4";
                         File hello2 = new File(hello);
                         acontext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(hello2)));
-                       // Toast.makeText(acontext,hello,Toast.LENGTH_SHORT).show();
                     }
-
-
-                  //  copyFileOrDirectory(modelStatus.getFull_path(), path);
-               //     String hello = modelStatus.getFull_path();
-                   // Toast.makeText(acontext,hello,Toast.LENGTH_SHORT).show();
-                    
                 }
             });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
-                    /*File file = new File(modelStatus.getFull_path());
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.fromFile(file), "image/*");
-                    acontext.startActivity(intent);*/
+                    StatusModel modelStatus = arrayList.get(getAbsoluteAdapterPosition());
                     Intent intent = new Intent(acontext, ImageViewerActivity.class);
                     intent.putExtra("image", modelStatus.getFull_path());
                     intent.putExtra("type", "" + modelStatus.getType());

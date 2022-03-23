@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.savestatus.adapter.WAPictureAdaptor;
-import com.example.savestatus.model.ModelStatus;
+import com.example.savestatus.model.StatusModel;
 import com.example.savestatus.R;
 import com.example.savestatus.utils.Config;
 
@@ -30,7 +30,7 @@ import java.util.ArrayList;
  */
 public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    ArrayList<ModelStatus> data;
+    ArrayList<StatusModel> data;
     RecyclerView rv;
     TextView textView;
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -72,7 +72,7 @@ public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.On
                         Log.d("Files", "FileName:" + files[i].getName().substring(0, files[i].getName().length() - 4));
                         if (files[i].getName().endsWith(".jpg") || files[i].getName().endsWith("gif")) {
                             paths[0] = path + "/" + files[i].getName();
-                            ModelStatus modelStatus = new ModelStatus(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
+                            StatusModel modelStatus = new StatusModel(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
                             data.add(modelStatus);
                         }
                     }
@@ -86,10 +86,10 @@ public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.On
                         textView.setVisibility(View.VISIBLE);
                         textView.setText("No Status Available \n Check Out some Status & come back again...");
                     }
-                    WAPictureAdaptor adapter = new WAPictureAdaptor(getActivity(), data);
+                    WAPictureAdaptor adapter = new WAPictureAdaptor(requireActivity(), data);
                     rv.setAdapter(adapter);
 
-                    LinearLayoutManager llm = new GridLayoutManager(getActivity(), 2);
+                    LinearLayoutManager llm = new GridLayoutManager(requireActivity(), 2);
                     rv.setLayoutManager(llm);
 
                 }
@@ -98,10 +98,10 @@ public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.On
             textView.setVisibility(View.VISIBLE);
             textView.setText("No Status Available \n Check Out some Status & come back again...");
 
-            Snackbar.make(getActivity().findViewById(android.R.id.content), "WhatsApp Not Installed",
+            Snackbar.make(requireActivity().findViewById(android.R.id.content), "WhatsApp Not Installed",
                     Snackbar.LENGTH_SHORT).show();
         }
-        refreshItems();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -109,11 +109,4 @@ public class WAPictureFragment extends Fragment implements SwipeRefreshLayout.On
         loadData();
     }
 
-    public void refreshItems() {
-        onItemsLoadComplete();
-    }
-
-    public void onItemsLoadComplete() {
-        mSwipeRefreshLayout.setRefreshing(false);
-    }
 }

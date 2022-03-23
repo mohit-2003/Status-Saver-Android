@@ -1,8 +1,6 @@
 package com.example.savestatus.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -33,7 +31,6 @@ public class ImageViewerActivity extends AppCompatActivity {
     String image_path = "", path = "", atype = "", package_name = "";
     String type = "";
     ImageView imageView;
-    String listenerValue = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,22 +70,14 @@ public class ImageViewerActivity extends AppCompatActivity {
         btn_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                   /* type == 0 (WhatsApp Normal)
-                    type == 1 (WhatsApp GB)
-                    type == 2 (WhatsApp Business)*/
                 copyFileOrDirectory(image_path, path);
-
             }
         });
         img_btn_download = findViewById(R.id.img_btn_download);
         img_btn_download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                   /* type == 0 (WhatsApp Normal)
-                    type == 1 (WhatsApp GB)
-                    type == 2 (WhatsApp Business)*/
                 copyFileOrDirectory(image_path, path);
-
             }
         });
 

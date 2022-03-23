@@ -6,6 +6,7 @@ import android.net.Uri;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.savestatus.model.ModelStatus;
+import com.example.savestatus.model.StatusModel;
 import com.example.savestatus.R;
 import com.example.savestatus.utils.Config;
-import com.example.savestatus.activity.VIdeoViewerActivity;
+import com.example.savestatus.activity.VideoViewerActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,9 +31,9 @@ import java.util.ArrayList;
 public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyViewHolder> {
 
     private Context acontext;
-    private ArrayList<ModelStatus> arrayList;
+    private ArrayList<StatusModel> arrayList;
 
-    public WAVideosAdaptor(Context context, ArrayList<ModelStatus> arrayList) {
+    public WAVideosAdaptor(Context context, ArrayList<StatusModel> arrayList) {
         this.arrayList = arrayList;
         acontext = context;
     }
@@ -46,7 +47,7 @@ public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ModelStatus current = arrayList.get(position);
+        StatusModel current = arrayList.get(position);
         Glide.with(acontext).load(current.getFull_path())
                 .into(holder.imageView);
     }
@@ -133,11 +134,8 @@ public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyView
             btn_download.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
                     String path = "";
-                   /* type == 0 (WhatsApp Normal)
-                    type == 1 (WhatsApp GB)
-                    type == 2 (WhatsApp Business)*/
                     if (modelStatus.getType() == 0) {
                         path = Config.WhatsAppSaveStatus;
 
@@ -158,7 +156,7 @@ public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyView
             btn_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
 
                     if (modelStatus.getFull_path().endsWith(".jpg")) {
                         shareVia("image/jpg", modelStatus.getFull_path());
@@ -172,7 +170,7 @@ public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyView
             img_btn_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
 
                     if (modelStatus.getFull_path().endsWith(".jpg")) {
                         shareVia("image/jpg", modelStatus.getFull_path());
@@ -189,11 +187,8 @@ public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyView
             img_btn_download.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
                     String path = "";
-                   /* type == 0 (WhatsApp Normal)
-                    type == 1 (WhatsApp GB)
-                    type == 2 (WhatsApp Business)*/
                     if (modelStatus.getType() == 0) {
                         path = Config.WhatsAppSaveStatus;
 
@@ -211,19 +206,13 @@ public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyView
                         File hello2 = new File(hello);
 
                         acontext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(hello2)));
-                        //   Toast.makeText(acontext,hello,Toast.LENGTH_SHORT).show();
 
                     } else if (modelStatus.getFull_path().endsWith(".mp4")) {
                         copyFileOrDirectory(modelStatus.getFull_path(), path);
                         String hello = path+modelStatus.getPath()+".mp4";
                         File hello2 = new File(hello);
                         acontext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(hello2)));
-                        // Toast.makeText(acontext,hello,Toast.LENGTH_SHORT).show();
                     }
-
-
-
-
                     
                 }
             });
@@ -231,16 +220,13 @@ public class WAVideosAdaptor extends RecyclerView.Adapter<WAVideosAdaptor.MyView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
-                    /*File file = new File(modelStatus.getFull_path());
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.fromFile(file), "video/*");
-                    acontext.startActivity(intent);*/
+                    StatusModel modelStatus = arrayList.get(getAbsoluteAdapterPosition());
 
-                    Intent intent = new Intent(acontext, VIdeoViewerActivity.class);
+                    Intent intent = new Intent(acontext, VideoViewerActivity.class);
                     intent.putExtra("video", modelStatus.getFull_path());
                     intent.putExtra("type", "" + modelStatus.getType());
                     intent.putExtra("atype", "1");
+                    intent.putExtra("position", getAbsoluteAdapterPosition());
                     acontext.startActivity(intent);
                 }
             });

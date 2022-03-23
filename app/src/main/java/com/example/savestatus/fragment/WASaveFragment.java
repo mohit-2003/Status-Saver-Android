@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.savestatus.adapter.WASavedAdaptor;
-import com.example.savestatus.model.ModelStatus;
+import com.example.savestatus.model.StatusModel;
 import com.example.savestatus.R;
 import com.example.savestatus.utils.Config;
 
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class WASaveFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 	
 
-    ArrayList<ModelStatus> data;
+    ArrayList<StatusModel> data;
     RecyclerView rv;
     TextView textView;
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -72,7 +72,7 @@ public class WASaveFragment extends Fragment implements SwipeRefreshLayout.OnRef
                         Log.d("Files", "FileName:" + files[i].getName().substring(0, files[i].getName().length() - 4));
                         if (files[i].getName().endsWith(".jpg") || files[i].getName().endsWith("gif") || files[i].getName().endsWith(".mp4")) {
                             paths[0] = path + "/" + files[i].getName();
-                            ModelStatus modelStatus = new ModelStatus(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
+                            StatusModel modelStatus = new StatusModel(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
                             data.add(modelStatus);
                         }
                     }
@@ -102,7 +102,7 @@ public class WASaveFragment extends Fragment implements SwipeRefreshLayout.OnRef
             Snackbar.make(getActivity().findViewById(android.R.id.content), "WhatsApp Not Installed",
                     Snackbar.LENGTH_SHORT).show();*/
         }
-        refreshItems();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -110,11 +110,4 @@ public class WASaveFragment extends Fragment implements SwipeRefreshLayout.OnRef
         loadData();
     }
 
-    public void refreshItems() {
-        onItemsLoadComplete();
-    }
-
-    public void onItemsLoadComplete() {
-        mSwipeRefreshLayout.setRefreshing(false);
-    }
 }

@@ -1,16 +1,11 @@
 <resources>
-    <string name="app_name">Status Saver For WhatsApp</string>
+    <string name="app_name">Status Saver</string>
     <string name="title_activity_main">WhatsAppStatus</string>
 
-    <string name="youAreNotUpdatedTitle">Update Available</string>
-    <string name="youAreNotUpdatedMessage">A new version of WhatsApp Status Saver is available. Please update to version\s</string>
-    <string name="youAreNotUpdatedMessage1">\s now</string>
-    <string name="update">Update</string>
     <string name="back_btn_msg">Please click back again to exit</string>
     <string name="whatsapp">WhatsApp</string>
     <string name="gb_whatsapp">GB WhatsApp</string>
     <string name="whatsapp_business">WhatsApp Business</string>
-    <string name="how_to_use">How to use</string>
     <string name="share">Share</string>
     <string name="change_mode">Change Mode</string>
     <!-- TODO: Remove or change this placeholder text -->

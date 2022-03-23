@@ -15,10 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.savestatus.model.ModelStatus;
+import com.example.savestatus.model.StatusModel;
 import com.example.savestatus.R;
 import com.example.savestatus.activity.ImageViewerActivity;
-import com.example.savestatus.activity.VIdeoViewerActivity;
+import com.example.savestatus.activity.VideoViewerActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,9 +26,9 @@ import java.util.ArrayList;
 public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHolder> {
 
     private Context acontext;
-    private ArrayList<ModelStatus> arrayList;
+    private ArrayList<StatusModel> arrayList;
 
-    public WASavedAdaptor(Context context, ArrayList<ModelStatus> arrayList) {
+    public WASavedAdaptor(Context context, ArrayList<StatusModel> arrayList) {
         this.arrayList = arrayList;
         acontext = context;
     }
@@ -41,7 +41,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ModelStatus current = arrayList.get(position);
+        StatusModel current = arrayList.get(position);
         Glide.with(acontext).load(current.getFull_path())
                 .into(holder.imageView);
     }
@@ -104,7 +104,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
                 @Override
                 public void onClick(View v) {
                     try {
-                        ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                        StatusModel modelStatus = arrayList.get(getAdapterPosition());
                         deleteFile(modelStatus.getFull_path(), getAdapterPosition());
                     } catch (ArrayIndexOutOfBoundsException e) {
                         e.printStackTrace();
@@ -118,7 +118,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
             btn_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
 
                     if (modelStatus.getFull_path().endsWith(".jpg")) {
                         shareVia("image/jpg", modelStatus.getFull_path());
@@ -133,7 +133,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
             img_btn_share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
 
                     if (modelStatus.getFull_path().endsWith(".jpg")) {
                         shareVia("image/jpg", modelStatus.getFull_path());
@@ -150,7 +150,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
                 @Override
                 public void onClick(View v) {
                     try {
-                        ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                        StatusModel modelStatus = arrayList.get(getAdapterPosition());
                         deleteFile(modelStatus.getFull_path(), getAdapterPosition());
                     } catch (ArrayIndexOutOfBoundsException ex) {
                     }
@@ -163,7 +163,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ModelStatus modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
                     if (modelStatus.getFull_path().endsWith(".jpg")) {
                         /*File file = new File(modelStatus.getFull_path());
                         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -180,7 +180,7 @@ public class WASavedAdaptor extends RecyclerView.Adapter<WASavedAdaptor.MyViewHo
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setDataAndType(Uri.fromFile(file), "video/*");
                         acontext.startActivity(intent);*/
-                        Intent intent = new Intent(acontext, VIdeoViewerActivity.class);
+                        Intent intent = new Intent(acontext, VideoViewerActivity.class);
                         intent.putExtra("video", modelStatus.getFull_path());
                         intent.putExtra("type", "" + modelStatus.getType());
                         intent.putExtra("atype", "0");

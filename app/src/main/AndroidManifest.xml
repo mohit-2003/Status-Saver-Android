@@ -38,19 +38,13 @@
             android:name="com.example.savestatus.activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.example.savestatus.activity.GWAActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.example.savestatus.activity.BWAActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
 
 
         <activity
             android:name="com.example.savestatus.activity.ImageViewerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.savestatus.activity.VIdeoViewerActivity"
+            android:name="com.example.savestatus.activity.VideoViewerActivity"
             android:configChanges="orientation"
             android:theme="@style/AppTheme.NoActionBar" />
 

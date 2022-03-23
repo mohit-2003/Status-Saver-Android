@@ -1,21 +1,21 @@
 package com.example.savestatus.model;
 
-public class ModelStatus {
+public class StatusModel {
 
     String full_path;
     String path;
     int type;
 
-    public ModelStatus(String full_path) {
+    public StatusModel(String full_path) {
         this.full_path = full_path;
     }
 
-    public ModelStatus(String full_path, String path) {
+    public StatusModel(String full_path, String path) {
         this.full_path = full_path;
         this.path = path;
     }
 
-    public ModelStatus(String full_path, String path, int type) {
+    public StatusModel(String full_path, String path, int type) {
         this.full_path = full_path;
         this.path = path;
         this.type = type;

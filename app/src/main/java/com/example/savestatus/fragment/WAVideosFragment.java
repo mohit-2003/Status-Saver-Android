@@ -16,7 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.savestatus.R;
 import com.example.savestatus.adapter.WAVideosAdaptor;
-import com.example.savestatus.model.ModelStatus;
+import com.example.savestatus.model.StatusModel;
 import com.example.savestatus.utils.Config;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -64,7 +64,7 @@ public class WAVideosFragment extends Fragment implements SwipeRefreshLayout.OnR
                         Log.d("Files", "FileName:" + files[i].getName().substring(0, files[i].getName().length() - 4));
                         if (files[i].getName().endsWith(".mp4")) {
                             paths[0] = path + "/" + files[i].getName();
-                            ModelStatus modelStatus = new ModelStatus(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
+                            StatusModel modelStatus = new StatusModel(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
                             Config.videoList.add(modelStatus);
                         }
                     }
@@ -93,19 +93,11 @@ public class WAVideosFragment extends Fragment implements SwipeRefreshLayout.OnR
             Snackbar.make(getActivity().findViewById(android.R.id.content), "WhatsApp Not Installed",
                     Snackbar.LENGTH_SHORT).show();
         }
-        refreshItems();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void onRefresh() {
         loadData();
-    }
-
-    public void refreshItems() {
-        onItemsLoadComplete();
-    }
-
-    public void onItemsLoadComplete() {
-        mSwipeRefreshLayout.setRefreshing(false);
     }
 }

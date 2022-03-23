@@ -6,7 +6,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +16,9 @@ import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.savestatus.R;
-import com.example.savestatus.model.ModelStatus;
+import com.example.savestatus.model.StatusModel;
 import com.example.savestatus.utils.Config;
 
 import java.io.File;
@@ -33,16 +31,12 @@ import java.util.List;
 public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.viewHolder> {
 
     String atype = "", package_name = "", path;
-    private int pos = 0;
     Context context;
-    ViewPager2 viewPager;
-    List<ModelStatus> videoList;
+    List<StatusModel> videoList;
 
-    public VideoViewAdapter(List<ModelStatus> videoList, Context context, ViewPager2 viewPager) {
+    public VideoViewAdapter(List<StatusModel> videoList, Context context) {
         this.videoList = videoList;
         this.context = context;
-        this.viewPager = viewPager;
-        Log.d("mht", "onBindViewHolder: cons " +videoList.size() );
     }
 
     @NonNull
@@ -55,11 +49,8 @@ public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.view
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
-        ModelStatus video = videoList.get(position);
+        StatusModel video = videoList.get(position);
         holder.videoView.setVideoPath(video.getFull_path());
-
-        if (position == videoList.size()-1)
-            Toast.makeText(context, "No more videos available...", Toast.LENGTH_SHORT).show();
 
         try {
             holder.videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
