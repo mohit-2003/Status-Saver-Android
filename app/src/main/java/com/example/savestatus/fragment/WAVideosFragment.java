@@ -1,35 +1,29 @@
 package com.example.savestatus.fragment;
 
-
 import android.os.AsyncTask;
 import android.os.Bundle;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.savestatus.adaptor.WAVideosAdaptor;
-import com.example.savestatus.model.ModelStatus;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.savestatus.R;
+import com.example.savestatus.adapter.WAVideosAdaptor;
+import com.example.savestatus.model.ModelStatus;
 import com.example.savestatus.utils.Config;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
-import java.util.ArrayList;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class WAVideosFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    ArrayList<ModelStatus> data;
     RecyclerView rv;
     TextView textView;
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -55,7 +49,7 @@ public class WAVideosFragment extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     public void loadData() {
-        data = new ArrayList<>();
+        Config.videoList.clear();
         final String path = Config.WhatsAppDirectoryPath;
         File directory = new File(path);
         if (directory.exists()) {
@@ -71,7 +65,7 @@ public class WAVideosFragment extends Fragment implements SwipeRefreshLayout.OnR
                         if (files[i].getName().endsWith(".mp4")) {
                             paths[0] = path + "/" + files[i].getName();
                             ModelStatus modelStatus = new ModelStatus(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
-                            data.add(modelStatus);
+                            Config.videoList.add(modelStatus);
                         }
                     }
                     return null;
@@ -80,11 +74,11 @@ public class WAVideosFragment extends Fragment implements SwipeRefreshLayout.OnR
                 @Override
                 protected void onPostExecute(Void aVoid) {
                     super.onPostExecute(aVoid);
-                    if (!(data.toArray().length > 0)) {
+                    if (!(Config.videoList.toArray().length > 0)) {
                         textView.setVisibility(View.VISIBLE);
                         textView.setText("No Status Available \n Check Out some Status & come back again...");
                     }
-                    WAVideosAdaptor adapter = new WAVideosAdaptor(getActivity(), data);
+                    WAVideosAdaptor adapter = new WAVideosAdaptor(getActivity(), Config.videoList);
                     rv.setAdapter(adapter);
 
                     LinearLayoutManager llm = new GridLayoutManager(getActivity(), 2);

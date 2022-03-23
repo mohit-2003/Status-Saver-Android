@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.savestatus.adaptor.WAVideosAdaptor;
+import com.example.savestatus.adapter.WAVideosAdaptor;
 import com.example.savestatus.model.ModelStatus;
 import com.example.savestatus.R;
 import com.example.savestatus.utils.Config;
@@ -29,7 +29,6 @@ import java.util.ArrayList;
  */
 public class BWAVideosFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    ArrayList<ModelStatus> data;
     RecyclerView rv;
     TextView textView;
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -57,7 +56,7 @@ public class BWAVideosFragment extends Fragment implements SwipeRefreshLayout.On
     }
 
     public void loadData() {
-        data = new ArrayList<>();
+        Config.videoList.clear();
         final String path = Config.WhatsAppBusinessDirectoryPath;
         File directory = new File(path);
         if (directory.exists()) {
@@ -75,7 +74,7 @@ public class BWAVideosFragment extends Fragment implements SwipeRefreshLayout.On
                         if (files[i].getName().endsWith(".mp4")) {
                             paths[0] = path + "" + files[i].getName();
                             ModelStatus modelStatus = new ModelStatus(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 2);
-                            data.add(modelStatus);
+                            Config.videoList.add(modelStatus);
                         }
                     }
                     return null;
@@ -84,11 +83,11 @@ public class BWAVideosFragment extends Fragment implements SwipeRefreshLayout.On
                 @Override
                 protected void onPostExecute(Void aVoid) {
                     super.onPostExecute(aVoid);
-                    if (!(data.toArray().length > 0)) {
+                    if (!(Config.videoList.toArray().length > 0)) {
                         textView.setVisibility(View.VISIBLE);
                         textView.setText("No Status Available \n Check Out some Status & come back again...");
                     }
-                    WAVideosAdaptor adapter = new WAVideosAdaptor(getActivity(), data);
+                    WAVideosAdaptor adapter = new WAVideosAdaptor(getActivity(), Config.videoList);
                     rv.setAdapter(adapter);
 
                     LinearLayoutManager llm = new GridLayoutManager(getActivity(), 2);

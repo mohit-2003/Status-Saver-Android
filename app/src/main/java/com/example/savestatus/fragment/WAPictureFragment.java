@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.savestatus.adaptor.WAPictureAdaptor;
+import com.example.savestatus.adapter.WAPictureAdaptor;
 import com.example.savestatus.model.ModelStatus;
 import com.example.savestatus.R;
 import com.example.savestatus.utils.Config;
