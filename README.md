@@ -20,8 +20,8 @@ Downlaod & Run [Apk](https://github.com/mohit-2003/Status-Saver-Android/blob/mas
 
 Contributions are always welcome!
 
-- Add features
-- Make it more lightweight
+- Add more features
+- Make it lightweight
 - Clean code (if you can)
 - Fix issue/bug
 
