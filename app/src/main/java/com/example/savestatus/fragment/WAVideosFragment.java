@@ -42,7 +42,6 @@ public class WAVideosFragment extends Fragment implements SwipeRefreshLayout.OnR
         mSwipeRefreshLayout.setOnRefreshListener(this);
         textView = view.findViewById(R.id.textView);
         rv.setHasFixedSize(true);
-
         loadData();
 
         return view;
@@ -78,10 +77,10 @@ public class WAVideosFragment extends Fragment implements SwipeRefreshLayout.OnR
                         textView.setVisibility(View.VISIBLE);
                         textView.setText("No Status Available \n Check Out some Status & come back again...");
                     }
-                    WAVideosAdapter adapter = new WAVideosAdapter(getActivity(), Config.videoList);
+                    WAVideosAdapter adapter = new WAVideosAdapter(requireActivity(), Config.videoList);
                     rv.setAdapter(adapter);
 
-                    LinearLayoutManager llm = new GridLayoutManager(getActivity(), 2);
+                    LinearLayoutManager llm = new GridLayoutManager(requireActivity(), 2);
                     rv.setLayoutManager(llm);
                 }
             }.execute();

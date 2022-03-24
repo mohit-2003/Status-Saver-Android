@@ -31,6 +31,8 @@ import java.util.List;
 public class ImageViewerActivity extends AppCompatActivity {
 
     private int position;
+    private boolean isSavedFragment;
+    private ImageViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +40,15 @@ public class ImageViewerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image);
 
         ViewPager2 viewPager = findViewById(R.id.imageViewPager);
-        List<StatusModel> list = Config.imgList;
         Intent intent = getIntent();
         if (intent != null) {
+            isSavedFragment = intent.getBooleanExtra("isSaved", false);
             position = intent.getIntExtra("position", 0);
         }
-        ImageViewAdapter adapter = new ImageViewAdapter(this, list);
+        if (isSavedFragment){
+            adapter = new ImageViewAdapter(Config.savedList, this);
+        } else
+            adapter = new ImageViewAdapter(Config.imgList, this);
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(position, false);
     }

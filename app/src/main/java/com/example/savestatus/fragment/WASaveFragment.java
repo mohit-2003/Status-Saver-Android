@@ -22,14 +22,8 @@ import com.example.savestatus.utils.Config;
 import java.io.File;
 import java.util.ArrayList;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class WASaveFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-	
 
-    ArrayList<StatusModel> data;
     RecyclerView rv;
     TextView textView;
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -42,21 +36,19 @@ public class WASaveFragment extends Fragment implements SwipeRefreshLayout.OnRef
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_save_pictures, container, false);
+        View view = inflater.inflate(R.layout.fragment_save, container, false);
         rv = view.findViewById(R.id.rv_status);
         mSwipeRefreshLayout = view.findViewById(R.id.contentView);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         textView = view.findViewById(R.id.textView);
-
         rv.setHasFixedSize(true);
-
         loadData();
 
         return view;
     }
 
     public void loadData() {
-        data = new ArrayList<>();
+        Config.savedList.clear();
         final String path = Config.WhatsAppSaveStatus;
         File directory = new File(path);
         if (directory.exists()) {
@@ -73,7 +65,7 @@ public class WASaveFragment extends Fragment implements SwipeRefreshLayout.OnRef
                         if (files[i].getName().endsWith(".jpg") || files[i].getName().endsWith("gif") || files[i].getName().endsWith(".mp4")) {
                             paths[0] = path + "/" + files[i].getName();
                             StatusModel modelStatus = new StatusModel(paths[0], files[i].getName().substring(0, files[i].getName().length() - 4), 0);
-                            data.add(modelStatus);
+                            Config.savedList.add(modelStatus);
                         }
                     }
                     return null;
@@ -82,25 +74,21 @@ public class WASaveFragment extends Fragment implements SwipeRefreshLayout.OnRef
                 @Override
                 protected void onPostExecute(Void aVoid) {
                     super.onPostExecute(aVoid);
-                    if (!(data.toArray().length > 0)) {
+                    if (!(Config.savedList.toArray().length > 0)) {
                         textView.setVisibility(View.VISIBLE);
                         textView.setText("No Status Available \n Check Out some Status & come back again...");
                     }
-                    WASavedAdapter adapter = new WASavedAdapter(getActivity(), data);
+                    WASavedAdapter adapter = new WASavedAdapter(requireActivity(), Config.savedList);
                     rv.setAdapter(adapter);
 
-                    LinearLayoutManager llm = new GridLayoutManager(getActivity(), 2);
+                    LinearLayoutManager llm = new GridLayoutManager(requireActivity(), 2);
                     rv.setLayoutManager(llm);
                 }
             }.execute();
 
-
         } else {
             textView.setVisibility(View.VISIBLE);
             textView.setText("No Status Available \n Check Out some Status & come back again...");
-/*
-            Snackbar.make(getActivity().findViewById(android.R.id.content), "WhatsApp Not Installed",
-                    Snackbar.LENGTH_SHORT).show();*/
         }
         mSwipeRefreshLayout.setRefreshing(false);
     }
@@ -109,5 +97,4 @@ public class WASaveFragment extends Fragment implements SwipeRefreshLayout.OnRef
     public void onRefresh() {
         loadData();
     }
-
 }

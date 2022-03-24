@@ -109,7 +109,6 @@ public class WAImageAdapter extends RecyclerView.Adapter<WAImageAdapter.MyViewHo
         Uri uri = Uri.fromFile(fileToShare);
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
         acontext.startActivity(Intent.createChooser(sharingIntent, "Share via.."));
-
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -143,7 +142,6 @@ public class WAImageAdapter extends RecyclerView.Adapter<WAImageAdapter.MyViewHo
                     }
                     copyFileOrDirectory(modelStatus.getFull_path(), path);
                     Toast.makeText(acontext,modelStatus.getFull_path(),Toast.LENGTH_SHORT).show();
-                    
 
                 }
             });
@@ -159,10 +157,6 @@ public class WAImageAdapter extends RecyclerView.Adapter<WAImageAdapter.MyViewHo
                     } else if (modelStatus.getFull_path().endsWith(".mp4")) {
                         shareVia("video/mp4", modelStatus.getFull_path());
                     }
-
-                    
-
-
                 }
             });
             img_btn_share = v.findViewById(R.id.img_btn_share);
@@ -176,8 +170,6 @@ public class WAImageAdapter extends RecyclerView.Adapter<WAImageAdapter.MyViewHo
                     } else if (modelStatus.getFull_path().endsWith(".mp4")) {
                         shareVia("video/mp4", modelStatus.getFull_path());
                     }
-                    
-
                 }
             });
 
@@ -225,7 +217,5 @@ public class WAImageAdapter extends RecyclerView.Adapter<WAImageAdapter.MyViewHo
                 }
             });
         }
-
     }
-
 }

@@ -145,8 +145,6 @@ public class WAVideosAdapter extends RecyclerView.Adapter<WAVideosAdapter.MyView
 
                     }
                     copyFileOrDirectory(modelStatus.getFull_path(), path);
-
-                    
                 }
             });
 
@@ -161,7 +159,6 @@ public class WAVideosAdapter extends RecyclerView.Adapter<WAVideosAdapter.MyView
                     } else if (modelStatus.getFull_path().endsWith(".mp4")) {
                         shareVia("video/mp4", modelStatus.getFull_path());
                     }
-
                 }
             });
             img_btn_share = v.findViewById(R.id.img_btn_share);
@@ -175,9 +172,6 @@ public class WAVideosAdapter extends RecyclerView.Adapter<WAVideosAdapter.MyView
                     } else if (modelStatus.getFull_path().endsWith(".mp4")) {
                         shareVia("video/mp4", modelStatus.getFull_path());
                     }
-
-                    
-
                 }
             });
 
@@ -211,7 +205,6 @@ public class WAVideosAdapter extends RecyclerView.Adapter<WAVideosAdapter.MyView
                         File hello2 = new File(hello);
                         acontext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(hello2)));
                     }
-                    
                 }
             });
 

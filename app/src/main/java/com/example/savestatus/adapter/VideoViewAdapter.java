@@ -104,7 +104,6 @@ public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.view
                 } else if (video.getFull_path().endsWith(".mp4")) {
                     shareVia("video/mp4", video.getFull_path());
                 }
-
             }
         });
 
@@ -117,7 +116,6 @@ public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.view
                 } else if (video.getFull_path().endsWith(".mp4")) {
                     shareVia("video/mp4", video.getFull_path());
                 }
-
             }
         });
 
@@ -130,9 +128,6 @@ public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.view
                 } else if (video.getFull_path().endsWith(".mp4")) {
                     shareViaWhatsApp("video/mp4", video.getFull_path(), package_name);
                 }
-
-
-
             }
         });
         holder.img_re_post.setOnClickListener(new View.OnClickListener() {
@@ -144,8 +139,6 @@ public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.view
                 } else if (video.getFull_path().endsWith(".mp4")) {
                     shareViaWhatsApp("video/mp4", video.getFull_path(), package_name);
                 }
-
-
             }
         });
 
@@ -175,7 +168,6 @@ public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.view
             img_btn_share = itemView.findViewById(R.id.img_btn_share);
             btn_re_post = itemView.findViewById(R.id.btn_re_post);
             img_re_post = itemView.findViewById(R.id.img_re_post);
-
         }
     }
 
@@ -235,9 +227,7 @@ public class VideoViewAdapter extends RecyclerView.Adapter<VideoViewAdapter.view
         Uri uri = Uri.fromFile(fileToShare);
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
         context.startActivity(Intent.createChooser(sharingIntent, "Share via"));
-
     }
-
 
     public void shareViaWhatsApp(String type, String path, String package_name) {
 

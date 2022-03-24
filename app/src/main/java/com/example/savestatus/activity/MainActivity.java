@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.nav_share) {
-            shareApp(); // TODO: will share apk
+            shareApp(); // TODO: share apk
         } else if (id == R.id.nav_whatsapp) {
             Toast.makeText(this, "Already at home", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_gb) {

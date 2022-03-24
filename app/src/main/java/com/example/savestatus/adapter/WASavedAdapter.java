@@ -6,6 +6,7 @@ import android.net.Uri;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -140,8 +141,6 @@ public class WASavedAdapter extends RecyclerView.Adapter<WASavedAdapter.MyViewHo
                     } else if (modelStatus.getFull_path().endsWith(".mp4")) {
                         shareVia("video/mp4", modelStatus.getFull_path());
                     }
-
-                    
                 }
             });
 
@@ -152,40 +151,29 @@ public class WASavedAdapter extends RecyclerView.Adapter<WASavedAdapter.MyViewHo
                     try {
                         StatusModel modelStatus = arrayList.get(getAdapterPosition());
                         deleteFile(modelStatus.getFull_path(), getAdapterPosition());
-                    } catch (ArrayIndexOutOfBoundsException ex) {
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        e.printStackTrace();
                     }
-
-                    
                 }
             });
-
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    StatusModel modelStatus = arrayList.get(getAdapterPosition());
+                    StatusModel modelStatus = arrayList.get(getAbsoluteAdapterPosition());
+                    Intent intent;
                     if (modelStatus.getFull_path().endsWith(".jpg")) {
-                        /*File file = new File(modelStatus.getFull_path());
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(Uri.fromFile(file), "image/*");
-                        acontext.startActivity(intent);*/
-
-                        Intent intent = new Intent(acontext, ImageViewerActivity.class);
+                        intent = new Intent(acontext, ImageViewerActivity.class);
                         intent.putExtra("image", modelStatus.getFull_path());
-                        intent.putExtra("type", "" + modelStatus.getType());
-                        intent.putExtra("atype", "0");
-                        acontext.startActivity(intent);
                     } else {
-                       /* File file = new File(modelStatus.getFull_path());
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(Uri.fromFile(file), "video/*");
-                        acontext.startActivity(intent);*/
-                        Intent intent = new Intent(acontext, VideoViewerActivity.class);
+                        intent = new Intent(acontext, VideoViewerActivity.class);
                         intent.putExtra("video", modelStatus.getFull_path());
-                        intent.putExtra("type", "" + modelStatus.getType());
-                        intent.putExtra("atype", "0");
-                        acontext.startActivity(intent);
                     }
+                    intent.putExtra("isSaved", true); // for only this fragment
+                    intent.putExtra("type", "" + modelStatus.getType());
+                    intent.putExtra("atype", "0");
+                    intent.putExtra("position", getAbsoluteAdapterPosition());
+                    acontext.startActivity(intent);
                 }
             });
         }

@@ -24,16 +24,11 @@ import com.example.savestatus.utils.Config;
 import java.io.File;
 import java.util.ArrayList;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class WAImageFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView rv;
     TextView textView;
     SwipeRefreshLayout mSwipeRefreshLayout;
-
 
     public WAImageFragment() {
         // Required empty public constructor
@@ -49,7 +44,6 @@ public class WAImageFragment extends Fragment implements SwipeRefreshLayout.OnRe
         mSwipeRefreshLayout.setOnRefreshListener(this);
         textView = view.findViewById(R.id.textView);
         rv.setHasFixedSize(true);
-
         loadData();
 
         return view;

@@ -44,10 +44,6 @@ public class SplashActivity extends Activity {
     }
 
     public void startActivity() {
-        handlerSplash();
-    }
-
-    public void handlerSplash() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -73,16 +69,13 @@ public class SplashActivity extends Activity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == 1) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 if (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        == PackageManager.PERMISSION_GRANTED) {
-
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     startActivity();
                 }
 
@@ -91,5 +84,4 @@ public class SplashActivity extends Activity {
             }
         }
     }
-
 }

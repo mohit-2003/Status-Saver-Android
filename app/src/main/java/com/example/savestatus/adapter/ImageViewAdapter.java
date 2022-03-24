@@ -34,7 +34,7 @@ public class ImageViewAdapter extends RecyclerView.Adapter<ImageViewAdapter.view
     Context context;
     List<StatusModel> imgList;
 
-    public ImageViewAdapter(Context context, List<StatusModel> imgList) {
+    public ImageViewAdapter(List<StatusModel> imgList, Context context) {
         this.context = context;
         this.imgList = imgList;
     }
@@ -150,7 +150,9 @@ public class ImageViewAdapter extends RecyclerView.Adapter<ImageViewAdapter.view
 
             if (src.isDirectory()) {
 
-                String files[] = src.list();
+                String[] files = src.list();
+                if (files==null)
+                    return;
                 for (String file : files) {
                     String src1 = (new File(src, file).getPath());
                     String dst1 = dst.getPath();
